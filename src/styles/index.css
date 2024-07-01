@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../assets/fonts/montserrat.woff2) format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Hind';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../assets/fonts/hind.woff2) format('woff2');
+  }
+}

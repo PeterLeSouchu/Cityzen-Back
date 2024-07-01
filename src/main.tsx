@@ -9,7 +9,6 @@ import {
 } from 'react-router-dom';
 
 import Root from './pages/Roots';
-import './styles/reset.css';
 import './styles/index.css';
 
 const root = ReactDOM.createRoot(
