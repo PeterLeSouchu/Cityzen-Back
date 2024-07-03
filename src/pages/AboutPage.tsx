@@ -77,6 +77,7 @@ function AboutPage() {
                 className="rounded-full w-24 h-24 mb-2 mx-auto"
               />
               <p>Ryad</p>
+              <p>Scrum Master</p>
             </div>
             <div className="text-center font-montserrat text-black">
               <img
@@ -85,6 +86,7 @@ function AboutPage() {
                 className="rounded-full w-24 h-24 mb-2 mx-auto"
               />
               <p>Emmanuel</p>
+              <p>Product Owner</p>
             </div>
             <div className="text-center font-montserrat text-black">
               <img
@@ -93,6 +95,7 @@ function AboutPage() {
                 className="rounded-full w-24 h-24 mb-2 mx-auto"
               />
               <p>Peter</p>
+              <p>Lead Dev Front</p>
             </div>
             <div className="text-center font-montserrat text-black">
               <img
@@ -101,6 +104,7 @@ function AboutPage() {
                 className="rounded-full w-24 h-24 mb-2 mx-auto"
               />
               <p>Wilson</p>
+              <p>Référent Technique</p>
             </div>
             <div className="text-center font-montserrat  text-black">
               <img
@@ -109,6 +113,7 @@ function AboutPage() {
                 className="rounded-full w-24 h-24 mb-2 mx-auto"
               />
               <p>Ziad</p>
+              <p>Git Master</p>
             </div>
           </div>
         </div>
