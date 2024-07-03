@@ -4,19 +4,21 @@ import {
   faCircleInfo,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import ModalSignup from './Modals/ModalSignup';
+import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 
 function Header() {
   return (
     <header>
-      <nav className="w-screen flex justify-between p-2.5 bg-green">
+      <nav className="w-screen flex justify-between p-2.5 bg-green h-16">
         <img className=" w-20 sm:w-20 md:w-24 " src={logo} alt="logo-site" />
 
-        <form className="w-full md:w-1/2 flex justify-center bg-whiteP rounded-md">
+        <form className="w-full md:w-1/2 flex justify-center bg-whiteP rounded-md h-full items-center">
           <input
             type="text"
             placeholder="Pays"
-            className="rounded-l w-1/2 p-1 Class
+            className="rounded-l w-1/2 p-2 Class
       Properties
       outline-none"
           />
@@ -26,12 +28,12 @@ function Header() {
           <input
             type="text"
             placeholder="Ville"
-            className="rounded-r w-1/2 p-1 Class
+            className="rounded-r w-1/2 p-2 Class
       Properties
       outline-none"
           />
-          <button type="submit" className="bg-slate-300 rounded-md ml-2 p-2">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <button type="submit" className="bg-slate-300 rounded-r-md ml-2 p-2">
+            <FontAwesomeIcon icon={faMagnifyingGlass} className="h-6" />
           </button>
         </form>
         <div className="justify-between items-center hidden md:flex">
@@ -45,10 +47,36 @@ function Header() {
               </div>
               <ul className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                 <li>
-                  <a>S'inscrire</a>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() =>
+                      document.getElementById('my_modal_3').showModal()
+                    }
+                  >
+                    Inscription
+                  </button>
+                  <dialog id="my_modal_3" className="modal relative">
+                    <div className="modal-box absolute">
+                      <ModalSignup />
+                    </div>
+                  </dialog>
                 </li>
                 <li>
-                  <a>Se connecter</a>
+                  <button
+                    type="button"
+                    className="btn"
+                    onClick={() =>
+                      document.getElementById('my_modal_4').showModal()
+                    }
+                  >
+                    Connexion
+                  </button>
+                  <dialog id="my_modal_4" className="modal relative">
+                    <div className="modal-box absolute">
+                      <ModalSignin />
+                    </div>
+                  </dialog>
                 </li>
               </ul>
             </div>
