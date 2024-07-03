@@ -4,6 +4,8 @@ import {
   faUser,
   faHouse,
 } from '@fortawesome/free-solid-svg-icons';
+import ModalSignin from './Modals/ModalSignin';
+import ModalSignup from './Modals/ModalSignup';
 
 function NavBottom() {
   return (
@@ -18,10 +20,36 @@ function NavBottom() {
             className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
           >
             <li>
-              <a>S'inscrire</a>
+              <button
+                type="button"
+                className="btn"
+                onClick={() =>
+                  document.getElementById('my_modal_5').showModal()
+                }
+              >
+                Inscription
+              </button>
+              <dialog id="my_modal_5" className="modal modal-middle relative">
+                <div className="modal-box absolute">
+                  <ModalSignup />
+                </div>
+              </dialog>
             </li>
             <li>
-              <a>Se connecter</a>
+              <button
+                type="button"
+                className="btn"
+                onClick={() =>
+                  document.getElementById('my_modal_6').showModal()
+                }
+              >
+                Connexion
+              </button>
+              <dialog id="my_modal_6" className="modal modal-middle relative">
+                <div className="modal-box absolute">
+                  <ModalSignin />
+                </div>
+              </dialog>
             </li>
           </ul>
         </div>
