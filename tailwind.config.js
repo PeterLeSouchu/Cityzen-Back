@@ -18,6 +18,9 @@ export default {
         montserrat: ['Montserrat', 'sans-serif'],
         hind: ['Hind', 'sans-serif'],
       },
+      maxWidth: {
+        screen: '100vw',
+      },
     },
   },
   plugins: [daisyui],
