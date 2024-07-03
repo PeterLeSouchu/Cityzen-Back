@@ -13,8 +13,9 @@ import './styles/index.css';
 
 import AboutPage from './pages/AboutPage';
 
-import HomePage from './pages/HomePage';
+import ActivityPage from './pages/ActivityPage';
 
+import HomePage from './pages/HomePage';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,11 +23,10 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
-
       <Route path="/about" element={<AboutPage />} />
-      
-      <Route index element={<HomePage />} />
+      <Route path="/activites" element={<ActivityPage />} />
 
+      <Route index element={<HomePage />} />
     </Route>
   )
 );
