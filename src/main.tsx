@@ -11,6 +11,7 @@ import {
 import Root from './pages/Roots';
 import './styles/index.css';
 import HomePage from './pages/HomePage';
+import Activities from './pages/Activities';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,6 +20,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>
       <Route index element={<HomePage />} />
+      <Route path="/activities" element={<Activities />} />
     </Route>
   )
 );
