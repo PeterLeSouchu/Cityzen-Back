@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   faCircleInfo,
   faUser,
@@ -9,7 +10,7 @@ import ModalSignup from './Modals/ModalSignup';
 
 function NavBottom() {
   return (
-    <nav className="flex justify-around items-center bg-lightgrey md:hidden fixed bottom-0 left-0 right-0 h-16">
+    <nav className="flex justify-around items-center bg-lightgrey md:hidden fixed bottom-0 left-0 right-0 h-7">
       <button type="button">
         <div className="dropdown dropdown-top">
           <div tabIndex={0} role="button" className="btn m-1">
@@ -51,15 +52,18 @@ function NavBottom() {
                 </div>
               </dialog>
             </li>
+            <li>
+              <Link to="/profile">Mon profil</Link>
+            </li>
           </ul>
         </div>
       </button>
-      <a href="">
+      <Link to="/">
         <FontAwesomeIcon icon={faHouse} className="h-8" />
-      </a>
-      <a href="">
+      </Link>
+      <Link to="/about">
         <FontAwesomeIcon icon={faCircleInfo} className="h-8" />
-      </a>
+      </Link>
     </nav>
   );
 }
