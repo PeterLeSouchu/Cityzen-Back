@@ -9,8 +9,8 @@ function Root() {
   return (
     <div>
       <Header />
-      <section className=" mb-16 md:mb-0">
-        <main>
+      <section className=" mb-7 md:mb-0 min-h-90 ">
+        <main className="min-h-80">
           <Outlet />
         </main>
         <Footer />
