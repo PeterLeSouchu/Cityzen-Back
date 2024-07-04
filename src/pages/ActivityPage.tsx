@@ -62,24 +62,6 @@ function ActivityPage() {
           board. Paddle out into the rolling waves off Biarritz, widely
           considered the finest surf spot along France’s Basque coastline.
         </p>
-        <div className="text-black mx-4 md:mx-8 lg:mx-16 flex flex-col mt-4 mb-4">
-          <input
-            type="text"
-            id="comment"
-            name="comment"
-            placeholder="Laissez un avis ... "
-            className="bg-white border-b border-black w-2/5 text-black outline-none"
-          />
-        </div>
-        <p className="ml-16 w-full lg:w-2/5 text-black">
-          Super leçon de surf avec Surf Academy!
-          <br />
-          L'instructeur était super patient et passionné, expliquant tout
-          clairement. Le matériel était top et les vagues parfaites pour
-          débutants. Ambiance géniale, on s'est bien amusés tout en apprenant.
-          Je recommande vivement!
-          <br />
-        </p>
       </div>
     </div>
   );

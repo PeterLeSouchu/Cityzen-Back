@@ -11,7 +11,7 @@ interface ActivitiesState {
 
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
-  logged: false,
+  logged: true,
   credentials: { pseudo: 'Tom', email: 'tom@gmail.com' },
   myFavorites: [
     {

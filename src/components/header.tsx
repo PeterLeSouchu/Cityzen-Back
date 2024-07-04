@@ -5,11 +5,13 @@ import {
   faCircleInfo,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector } from '../hooks/redux';
 import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 
 function Header() {
+  const logged = useAppSelector((store) => store.profile.logged);
   return (
     <header className="flex items-center w-screen bg-green h-10 px-5 min-h-16">
       <nav className="flex justify-between items-center w-screen">
@@ -47,41 +49,51 @@ function Header() {
                 <FontAwesomeIcon icon={faUser} />
               </div>
               <ul className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                <li>
-                  <button
-                    type="button"
-                    className="btn"
-                    onClick={() =>
-                      document.getElementById('my_modal_3').showModal()
-                    }
-                  >
-                    Inscription
-                  </button>
-                  <dialog id="my_modal_3" className="modal relative">
-                    <div className="modal-box absolute">
-                      <ModalSignup />
-                    </div>
-                  </dialog>
-                </li>
-                <li>
-                  <button
-                    type="button"
-                    className="btn"
-                    onClick={() =>
-                      document.getElementById('my_modal_4').showModal()
-                    }
-                  >
-                    Connexion
-                  </button>
-                  <dialog id="my_modal_4" className="modal relative">
-                    <div className="modal-box absolute">
-                      <ModalSignin />
-                    </div>
-                  </dialog>
-                </li>
-                <li>
-                  <Link to="/profile">Mon profil</Link>
-                </li>
+                {logged ? (
+                  <>
+                    <li>
+                      <Link to="/profile">Mon profil</Link>
+                    </li>
+                    <li>
+                      <Link to="/">Se déconnecter</Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <button
+                        type="button"
+                        className="btn"
+                        onClick={() =>
+                          document.getElementById('my_modal_3').showModal()
+                        }
+                      >
+                        Inscription
+                      </button>
+                      <dialog id="my_modal_3" className="modal relative">
+                        <div className="modal-box absolute">
+                          <ModalSignup />
+                        </div>
+                      </dialog>
+                    </li>
+                    <li>
+                      <button
+                        type="button"
+                        className="btn"
+                        onClick={() =>
+                          document.getElementById('my_modal_4').showModal()
+                        }
+                      >
+                        Connexion
+                      </button>
+                      <dialog id="my_modal_4" className="modal relative">
+                        <div className="modal-box absolute">
+                          <ModalSignin />
+                        </div>
+                      </dialog>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </div>
