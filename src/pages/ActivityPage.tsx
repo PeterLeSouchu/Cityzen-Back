@@ -68,7 +68,7 @@ function ActivityPage() {
             id="comment"
             name="comment"
             placeholder="Laissez un avis ... "
-            className="bg-white border-b border-black w-2/5 text-black"
+            className="bg-white border-b border-black w-2/5 text-black outline-none"
           />
         </div>
         <p className="ml-16 w-full lg:w-2/5 text-black">
