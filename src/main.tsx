@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
 import {
   Route,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 import Root from './pages/Roots';
 import './styles/index.css';
@@ -38,4 +39,12 @@ const router = createBrowserRouter(
   )
 );
 
-root.render(<RouterProvider router={router} />);
+// Ici on utilise le stricmode pour nous aider à detecter les problèmes.
+// Puis on ajoute notre store au router
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
+  </React.StrictMode>
+);
