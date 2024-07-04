@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="footer footer-center bg-blue/50 text-base-content text-black p-4 h-max">
+    <footer className="footer footer-center bg-blue/50 text-base-content text-black p-4 h-10 min-h-16 ">
       <aside>
         <p>
           Copyright © {new Date().getFullYear()} - CityZen - Tous droits
@@ -12,5 +12,3 @@ function Footer() {
 }
 
 export default Footer;
-
-

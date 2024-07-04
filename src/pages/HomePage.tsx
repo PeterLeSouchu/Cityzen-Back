@@ -14,7 +14,7 @@ function HomePage() {
         </div>
       </div>
 
-      <div className="h-screen bg-lightgrey flex flex-col justify-center gap-32 md:gap-24 lg:gap-16">
+      <div className="h-screen bg-lightgrey flex flex-col justify-center gap-32 md:gap-24 lg:gap-16 ">
         <div className="flex flex-col px-4 md:px-8 lg:mx-auto">
           <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-3xl lg:text-4xl lg:mb-10">
             Les plus récentes
