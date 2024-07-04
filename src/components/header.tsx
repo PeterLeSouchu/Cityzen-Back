@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   faMagnifyingGlass,
   faCircleInfo,
@@ -10,16 +11,17 @@ import logo from '../assets/logo.png';
 
 function Header() {
   return (
-    <header>
-      <nav className="w-screen flex justify-between p-2.5 bg-green h-16">
-        <img className=" w-20 sm:w-20 md:w-24 " src={logo} alt="logo-site" />
+    <header className="flex items-center w-screen bg-green h-10 px-5 min-h-16">
+      <nav className="flex justify-between items-center w-screen">
+        <Link to="/">
+          <img className="h-16" src={logo} alt="logo-site" />
+        </Link>
 
-        <form className="w-full md:w-1/2 flex justify-center bg-whiteP rounded-md h-full items-center">
+        <form className="h-12 w-full md:w-1/2 flex justify-center bg-whiteP rounded-md items-center">
           <input
             type="text"
             placeholder="Pays"
-            className="rounded-l w-1/2 p-2 Class
-      Properties
+            className="rounded-l w-1/2 p-2 
       outline-none"
           />
           <span className="text-grey flex justify-center items-center h-16">
@@ -28,19 +30,18 @@ function Header() {
           <input
             type="text"
             placeholder="Ville"
-            className="rounded-r w-1/2 p-2 Class
-      Properties
+            className="rounded-r w-1/2 p-2 
       outline-none"
           />
-          <button type="submit" className="bg-slate-300 rounded-r-md ml-2 p-2">
+          <button type="submit" className="rounded-r-md ml-2 p-2">
             <FontAwesomeIcon icon={faMagnifyingGlass} className="h-6" />
           </button>
         </form>
         <div className="justify-between items-center hidden md:flex">
-          <a href="#" className="w-16">
+          <Link to="/about" className="w-16">
             <FontAwesomeIcon icon={faCircleInfo} className="h-8" />
-          </a>
-          <a href="#">
+          </Link>
+          <div>
             <div className="dropdown dropdown-bottom dropdown-end">
               <div tabIndex={0} role="button" className="btn">
                 <FontAwesomeIcon icon={faUser} />
@@ -78,9 +79,12 @@ function Header() {
                     </div>
                   </dialog>
                 </li>
+                <li>
+                  <Link to="/profile">Mon profil</Link>
+                </li>
               </ul>
             </div>
-          </a>
+          </div>
         </div>
       </nav>
     </header>

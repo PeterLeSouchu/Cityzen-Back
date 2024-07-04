@@ -21,6 +21,24 @@ export default {
       maxWidth: {
         screen: '100vw',
       },
+      minWidth: {
+        16: '16.666667%',
+      },
+      height: {
+        90: '90vh',
+        80: '80vh',
+        10: '10vh',
+        7: '7vh',
+        900: '90%',
+      },
+      margin: {
+        7: '7vh',
+        10: '10vh',
+      },
+      minHeight: {
+        90: '90vh',
+        80: '80vh',
+      },
     },
   },
   plugins: [daisyui],
