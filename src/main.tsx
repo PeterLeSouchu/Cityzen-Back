@@ -14,6 +14,7 @@ import './styles/index.css';
 import AboutPage from './pages/AboutPage';
 
 import HomePage from './pages/HomePage';
+import Activities from './pages/Activities';
 import ProfilePage from './pages/ProfilePage';
 import InfosPage from './pages/InfosPage';
 import FavoritePage from './pages/FavoritePage';
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route index element={<HomePage />} />
+      <Route path="/activities" element={<Activities />} />
     </Route>
   )
 );
