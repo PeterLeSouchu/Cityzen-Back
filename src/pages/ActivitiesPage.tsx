@@ -1,7 +1,7 @@
 import Map from '../components/Map';
 import ActivityCard from '../components/ActivityCard';
 
-function Activities() {
+function ActivitiesPage() {
   return (
     <div className="flex flex-row">
       <div className="flex flex-row flex-wrap gap-8 w-7/12 justify-center my-8">
@@ -32,4 +32,4 @@ function Activities() {
   );
 }
 
-export default Activities;
+export default ActivitiesPage;
