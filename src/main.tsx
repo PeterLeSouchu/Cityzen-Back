@@ -28,7 +28,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter(
   createRoutesFromElements(
 
-    <Route path="/" element={<Root />}>
+    <Route path="/" element={<Root />} errorElement={<NotFound />}>
       
       <Route index element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
@@ -36,7 +36,6 @@ const router = createBrowserRouter(
       <Route path="/activities" element={<Activities />} />
 
       
-    <Route path="/" element={<Root />} errorElement={<NotFound />}>
       <Route path="/about" element={<AboutPage />} />
       <Route path="/profile" element={<ProfilePage />}>
         <Route path="/profile/favorites" element={<FavoritePage />} />
