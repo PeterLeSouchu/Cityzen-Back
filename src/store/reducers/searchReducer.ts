@@ -29,6 +29,7 @@ const initialState: SearchState = {
   country: 'France',
 };
 
+// On créé le reducer
 export const searchReducer = createReducer(initialState, (builder) => {
   //
 });
