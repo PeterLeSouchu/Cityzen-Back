@@ -11,6 +11,7 @@ interface ActivitiesState {
   recents: Activities[];
   topRated: Activities[];
   results: Activities[];
+  searchedActivities: Activities[];
 }
 
 export const updateRecentsActivities = createAsyncThunk(
@@ -24,6 +25,15 @@ export const updateRatingActivities = createAsyncThunk(
   'ACTIVITIES/UPDATE_RATING_ACTIVITIES',
   async () => {
     const { data } = await axios.get('http://localhost:3000/activity/rating');
+    return data as { data: Activities[] };
+  }
+);
+export const fecthActivitiesByCountryCity = createAsyncThunk(
+  'ACTIVITIES/FETCH_BY_COUNTRY_CITY',
+  async ({ country, city }: { country: string; city: string }) => {
+    const { data } = await axios.get(
+      `http://localhost:3000/activity/${country}/${city}`
+    );
     return data as { data: Activities[] };
   }
 );
@@ -75,6 +85,21 @@ const initialState: ActivitiesState = {
       city_id: 2,
     },
   ],
+  searchedActivities: [
+    {
+      id: 2,
+      title: 'test',
+      url: 'test',
+      description: 'test',
+      avg_rate: 2,
+      image: 'test',
+      address: 'test',
+      phone: 'test',
+      latitude: 2,
+      longitude: 2,
+      city_id: 2,
+    },
+  ],
 };
 
 // On créé le reducer
@@ -85,6 +110,9 @@ export const activitiesReducer = createReducer(initialState, (builder) => {
     })
     .addCase(updateRatingActivities.fulfilled, (state, action) => {
       state.topRated = action.payload.data;
+    })
+    .addCase(fecthActivitiesByCountryCity.fulfilled, (state, action) => {
+      state.searchedActivities = action.payload.data;
     });
   //
 });

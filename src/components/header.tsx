@@ -1,15 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import {
   faMagnifyingGlass,
   faCircleInfo,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
-import { useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
+import { fecthActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
 
 function Header() {
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
@@ -26,6 +27,26 @@ function Header() {
     setCity(event.target.value);
   }
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  function handleFormSubmit(event: React.ChangeEvent<HTMLInputElement>) {
+    event.preventDefault();
+
+    const fetchData = async () => {
+      try {
+        await dispatch(fecthActivitiesByCountryCity({ country, city }));
+
+        navigate('/activities');
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        // Handle error appropriately, e.g., show a user-friendly message
+      }
+    };
+
+    fetchData();
+  }
+
   return (
     <header className="flex items-center w-screen bg-green h-10 px-5 min-h-16">
       <nav className="flex justify-between items-center w-screen">
@@ -33,8 +54,12 @@ function Header() {
           <img className="h-16" src={logo} alt="logo-site" />
         </Link>
 
-        <form className="h-12 w-full md:w-1/2 flex justify-center bg-whiteP rounded-md items-center">
+        <form
+          className="h-12 w-full md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
+          onSubmit={handleFormSubmit}
+        >
           <input
+            required
             onChange={handlerChangeCountry}
             value={country}
             type="text"
@@ -46,6 +71,7 @@ function Header() {
             |
           </span>
           <input
+            required
             onChange={handlerChangeCity}
             value={city}
             type="text"
