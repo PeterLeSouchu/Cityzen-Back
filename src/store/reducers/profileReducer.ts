@@ -15,41 +15,40 @@ const initialState: ActivitiesState = {
   credentials: { pseudo: 'Tom', email: 'tom@gmail.com' },
   myFavorites: [
     {
-      activity_id: 2,
-      slug: 'test',
-      url: 'test',
+      id: 2,
       title: 'test',
+      url: 'test',
       description: 'test',
-      url_image: 'test',
+      avg_rate: 2,
+      image: 'test',
       address: 'test',
-      avg_note: 2,
       phone: 'test',
       latitude: 2,
       longitude: 2,
-      user_id: 2,
       city_id: 2,
     },
   ],
   myActivities: [
     {
-      activity_id: 2,
-      slug: 'test',
-      url: 'test',
+      id: 2,
       title: 'test',
+      url: 'test',
       description: 'test',
-      url_image: 'test',
+      avg_rate: 2,
+      image: 'test',
       address: 'test',
-      avg_note: 2,
       phone: 'test',
       latitude: 2,
       longitude: 2,
-      user_id: 2,
       city_id: 2,
     },
   ],
 };
 
+export const isLoggin = createAction('SETTINGS/TOGGLE_SETTINGS');
 // On créé le reducer
 export const profileReducer = createReducer(initialState, (builder) => {
-  //
+  builder.addCase(isLoggin, (state) => {
+    state.logged = !state.logged;
+  });
 });
