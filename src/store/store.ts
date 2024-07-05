@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { searchReducer } from './reducers/searchReducer';
 import { activitiesReducer } from './reducers/activitiesReducer';
 import { profileReducer } from './reducers/profileReducer';
 
 // Création du store
 const store = configureStore({
   reducer: {
-    search: searchReducer,
     activities: activitiesReducer,
     profile: profileReducer,
   },

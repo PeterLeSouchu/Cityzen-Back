@@ -5,6 +5,7 @@ import { Activities } from '../../@types';
 interface ActivitiesState {
   recents: Activities[];
   topRated: Activities[];
+  results: Activities[];
 }
 
 // On initialise notre state de départ
@@ -27,6 +28,23 @@ const initialState: ActivitiesState = {
     },
   ],
   topRated: [
+    {
+      activity_id: 2,
+      slug: 'test',
+      url: 'test',
+      title: 'test',
+      description: 'test',
+      url_image: 'test',
+      address: 'test',
+      avg_note: 2,
+      phone: 'test',
+      latitude: 2,
+      longitude: 2,
+      user_id: 2,
+      city_id: 2,
+    },
+  ],
+  results: [
     {
       activity_id: 2,
       slug: 'test',

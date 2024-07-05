@@ -1,7 +1,11 @@
 import { faTrash, faStar, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import { Activities } from '../@types';
 
 function MyActivitiesPage() {
+  // Pas besoin de déclarer ce state dans le store étant donné qu'il ne sert que dans ce composant, autant se simplifier la tâche et le mettre en local avec le hook useState.
+  const [myActivities, setMyActivities] = useState<Activities[]>([]);
   return (
     <div className="flex flex-wrap gap-2 p-5 ">
       <div className=" card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl">

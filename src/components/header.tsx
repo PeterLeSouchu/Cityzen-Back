@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import {
   faMagnifyingGlass,
   faCircleInfo,
@@ -11,7 +12,20 @@ import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 
 function Header() {
+  // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
+  const [city, setCity] = useState<string>('');
+  const [country, setCountry] = useState<string>('');
   const logged = useAppSelector((store) => store.profile.logged);
+
+  // Fonction pour controller l'input pays, en mettant ca valeur dans le state "country"
+  function handlerChangeCountry(event: React.ChangeEvent<HTMLInputElement>) {
+    setCountry(event.target.value);
+  }
+  // Fonction pour controller l'input ville, en mettant ca valeur dans le state "city"
+  function handlerChangeCity(event: React.ChangeEvent<HTMLInputElement>) {
+    setCity(event.target.value);
+  }
+
   return (
     <header className="flex items-center w-screen bg-green h-10 px-5 min-h-16">
       <nav className="flex justify-between items-center w-screen">
@@ -21,6 +35,8 @@ function Header() {
 
         <form className="h-12 w-full md:w-1/2 flex justify-center bg-whiteP rounded-md items-center">
           <input
+            onChange={handlerChangeCountry}
+            value={country}
             type="text"
             placeholder="Pays"
             className="rounded-l w-1/2 p-2 
@@ -30,6 +46,8 @@ function Header() {
             |
           </span>
           <input
+            onChange={handlerChangeCity}
+            value={city}
             type="text"
             placeholder="Ville"
             className="rounded-r w-1/2 p-2 
