@@ -1,17 +1,15 @@
 // Type d'une activité
 export interface Activities {
-  activity_id: number;
-  slug: string;
-  url: string;
+  id: number;
   title: string;
+  url: string;
   description: string;
-  url_image: string;
+  avg_rate: number;
+  image: string;
   address: string;
-  avg_note: number;
   phone: string;
   latitude: number;
   longitude: number;
-  user_id: number;
   city_id: number;
 }
 
