@@ -13,8 +13,10 @@ import logo from '../assets/logo.png';
 import { fecthActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
 
 function Header() {
+  const [modalSignup, setModalSignup] = useState(false);
+  const [modalSignin, setModalSignin] = useState(false);
+
   const location = useLocation();
-  console.log(location.pathname);
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
@@ -50,6 +52,21 @@ function Header() {
     };
 
     fetchData();
+  }
+
+  function handlerSingup(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    setModalSignup((modal) => !modal);
+    setModalSignin(false);
+    console.log('Signup');
+  }
+  function handlerSingin(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    setModalSignin((modal) => !modal);
+    setModalSignup(false);
+    console.log(modalSignin);
   }
 
   return (
@@ -110,36 +127,14 @@ function Header() {
                 ) : (
                   <>
                     <li>
-                      <button
-                        type="button"
-                        className="btn"
-                        onClick={() =>
-                          document.getElementById('my_modal_3').showModal()
-                        }
-                      >
+                      <button type="button" onClick={handlerSingup}>
                         Inscription
                       </button>
-                      <dialog id="my_modal_3" className="modal relative">
-                        <div className="modal-box absolute">
-                          <ModalSignup />
-                        </div>
-                      </dialog>
                     </li>
                     <li>
-                      <button
-                        type="button"
-                        className="btn"
-                        onClick={() =>
-                          document.getElementById('my_modal_4').showModal()
-                        }
-                      >
+                      <button type="button" onClick={handlerSingin}>
                         Connexion
                       </button>
-                      <dialog id="my_modal_4" className="modal relative">
-                        <div className="modal-box absolute">
-                          <ModalSignin />
-                        </div>
-                      </dialog>
                     </li>
                   </>
                 )}
@@ -148,6 +143,13 @@ function Header() {
           </div>
         </div>
       </nav>
+      {modalSignup ? (
+        <ModalSignup
+          setModalSignup={setModalSignup}
+          setModalSignin={setModalSignin}
+        />
+      ) : null}
+      {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
     </header>
   );
 }

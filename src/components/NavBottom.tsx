@@ -5,8 +5,8 @@ import {
   faUser,
   faHouse,
 } from '@fortawesome/free-solid-svg-icons';
-import ModalSignin from './Modals/ModalSignin';
-import ModalSignup from './Modals/ModalSignup';
+import ModalSignin from './Modals/ModalSignup';
+import ModalSignup from './Modals/ModalSignin';
 import { useAppSelector } from '../hooks/redux';
 
 function NavBottom() {

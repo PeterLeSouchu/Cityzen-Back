@@ -1,12 +1,12 @@
-interface ModalSignupProps {
-  setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
+interface ModalEditActivityProps {
+  setModalEditActivity: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalSignin({ setModalSignin }: ModalSignupProps) {
+function ModalEditActivity({ setModalEditActivity }: ModalEditActivityProps) {
   function handlerRegister(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
-    setModalSignin(false);
+    setModalEditActivity(false);
   }
 
   return (
@@ -14,7 +14,7 @@ function ModalSignin({ setModalSignin }: ModalSignupProps) {
       <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
-            setModalSignin(false);
+            setModalEditActivity(false);
           }}
           type="button"
           className="w-full text-right"
@@ -23,19 +23,23 @@ function ModalSignin({ setModalSignin }: ModalSignupProps) {
         </button>
         <form className="flex flex-col">
           <div className="flex flex-col">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="title">Titre</label>
             <input
               type="text"
-              placeholder="Entrez votre adresse mail"
-              id="email"
+              placeholder="Entrez le titre de votre activité"
+              id="title"
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="file">Photo (1 seule)</label>
+            <input type="file" placeholder="Ajouter une photo" id="file" />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="description">Description</label>
             <input
-              type="password"
-              placeholder="Entrez votre mot de passe"
-              id="password"
+              type="text"
+              placeholder="Entrez la description de votre activité"
+              id="description"
             />
           </div>
           <button type="submit" onClick={handlerRegister}>
@@ -46,4 +50,4 @@ function ModalSignin({ setModalSignin }: ModalSignupProps) {
     </div>
   );
 }
-export default ModalSignin;
+export default ModalEditActivity;

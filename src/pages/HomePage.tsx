@@ -14,7 +14,6 @@ function HomePage() {
         const { data } = await axios.get(
           'http://localhost:3000/activity/recent'
         );
-        console.log(data.data);
         setRecents(data.data);
       } catch (error) {
         console.error(error);
