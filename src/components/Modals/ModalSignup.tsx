@@ -1,51 +1,63 @@
-function ModalSignup() {
+interface ModalSignupProps {
+  setModalSignup: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function ModalSignup({ setModalSignup }: ModalSignupProps) {
+  function handlerRegister(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): void {
+    setModalSignup(false);
+  }
+
   return (
-    <>
-      <form method="dialog">
-        {/* if there is a button in form, it will close the modal */}
-        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-          ✕
+    <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
+      <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
+        <button
+          onClick={() => {
+            setModalSignup(false);
+          }}
+          type="button"
+          className="w-full text-right"
+        >
+          Close
         </button>
-      </form>
-      <form className="card-body">
-        <div className="form-control">
-          <div className="label">
-            <span className="label-text">Email</span>
+        <form className="flex flex-col">
+          <div className="flex flex-col">
+            <label htmlFor="pseudo">Pseudo</label>
+            <input type="text" placeholder="Entrez votre pseudo" id="pseudo" />
           </div>
-          <input
-            type="email"
-            placeholder="email"
-            className="input input-bordered"
-            required
-          />
-        </div>
-        <div className="form-control">
-          <div className="label">
-            <span className="label-text">Mot de passe</span>
+          <div className="flex flex-col">
+            <label htmlFor="email">Email</label>
+            <input
+              type="text"
+              placeholder="Entrez votre adresse mail"
+              id="email"
+            />
           </div>
-          <input
-            type="password"
-            placeholder="mot de passe"
-            className="input input-bordered"
-            required
-          />
-          <div className="label">
-            <span className="label-text">Confirmer le mot de passe</span>
+          <div className="flex flex-col">
+            <label htmlFor="password">Mot de passe</label>
+            <input
+              type="password"
+              placeholder="Entrez votre mot de passe"
+              id="password"
+            />
           </div>
-          <input
-            type="password"
-            placeholder="confirmer le mot de passe"
-            className="input input-bordered"
-            required
-          />
-        </div>
-        <div className="form-control mt-6">
-          <button type="button" className="btn btn-primary">
-            Inscription
+          <div className="flex flex-col">
+            <label htmlFor="password-confirm">
+              confirmation du mot de passe
+            </label>
+            <input
+              type="password"
+              placeholder="Confirmer votre mot de passe"
+              id="password-confirm"
+            />
+          </div>
+          <button type="submit" onClick={handlerRegister}>
+            Confirmer
           </button>
-        </div>
-      </form>
-    </>
+        </form>
+      </div>
+    </div>
   );
 }
 export default ModalSignup;
