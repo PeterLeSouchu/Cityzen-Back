@@ -1,4 +1,5 @@
-import { createReducer } from '@reduxjs/toolkit';
+import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import axios from 'axios';
 import { Credentials, Activities } from '../../@types';
 
 // Création de l'interface (ce à quoi devra ressembler l'état)
@@ -7,6 +8,26 @@ interface ActivitiesState {
   credentials: Credentials;
   myFavorites: Activities[];
 }
+
+export const addToFavorites = createAsyncThunk(
+  'PROFILE/ADD-RO-FAVORITES',
+  async ({ id }: { id: number }) => {
+    const { data } = await axios.post(
+      'http://localhost:3000/profil/favorite',
+      id
+    );
+    return data as { data: Activities };
+  }
+);
+export const deleteFromFavorites = createAsyncThunk(
+  'PROFILE/ADD-RO-FAVORITES',
+  async ({ id }: { id: number }) => {
+    const { data } = await axios.delete(
+      `http://localhost:3000/profil/favorite${id}`
+    );
+    return data as { data: number };
+  }
+);
 
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
@@ -30,4 +51,14 @@ const initialState: ActivitiesState = {
 };
 
 // On créé le reducer
-export const profileReducer = createReducer(initialState, (builder) => {});
+export const profileReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(addToFavorites.fulfilled, (state, action) => {
+      state.myFavorites.push(action.payload.data);
+    })
+    .addCase(deleteFromFavorites.fulfilled, (state, action) => {
+      state.myFavorites = state.myFavorites.filter(
+        (activity) => activity.id !== action.payload.data
+      );
+    });
+});

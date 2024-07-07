@@ -3,9 +3,7 @@ interface ModalSignupProps {
 }
 
 function ModalSignup({ setModalSignup }: ModalSignupProps) {
-  function handlerRegister(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerRegister(): void {
     setModalSignup(false);
   }
 

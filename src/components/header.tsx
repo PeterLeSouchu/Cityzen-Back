@@ -59,14 +59,12 @@ function Header() {
   ): void {
     setModalSignup((modal) => !modal);
     setModalSignin(false);
-    console.log('Signup');
   }
   function handlerSingin(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
     setModalSignin((modal) => !modal);
     setModalSignup(false);
-    console.log(modalSignin);
   }
 
   return (
@@ -143,12 +141,7 @@ function Header() {
           </div>
         </div>
       </nav>
-      {modalSignup ? (
-        <ModalSignup
-          setModalSignup={setModalSignup}
-          setModalSignin={setModalSignin}
-        />
-      ) : null}
+      {modalSignup ? <ModalSignup setModalSignup={setModalSignup} /> : null}
       {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
     </header>
   );
