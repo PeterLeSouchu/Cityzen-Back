@@ -26,10 +26,13 @@ export default {
       },
       height: {
         90: '90vh',
+        50: '50vh',
         80: '80vh',
+        83: '83vh',
         10: '10vh',
         7: '7vh',
         900: '90%',
+        41.5: '41.5vh',
       },
       margin: {
         7: '7vh',
@@ -38,6 +41,7 @@ export default {
       minHeight: {
         90: '90vh',
         80: '80vh',
+        83: '83vh',
       },
     },
   },
