@@ -8,7 +8,7 @@ import imageabout from '../assets/about.jpeg';
 
 function AboutPage() {
   return (
-    <div className="bg-green py-10">
+    <div className="py-10">
       <div className="container mx-auto px-4">
         <div className="bg-lightgrey p-6  shadow-lg  w-1024 h-332 flex flex-col md:flex-row">
           <div className="md:w-2/5 md:pr-4 ml-20">

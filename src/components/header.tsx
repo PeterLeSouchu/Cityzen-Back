@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import {
   faMagnifyingGlass,
@@ -13,6 +13,8 @@ import logo from '../assets/logo.png';
 import { fecthActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
 
 function Header() {
+  const location = useLocation();
+  console.log(location.pathname);
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
@@ -37,7 +39,10 @@ function Header() {
       try {
         await dispatch(fecthActivitiesByCountryCity({ country, city }));
 
-        navigate('/activities');
+        // Si l'url est différente de '/activities' alors on redirige, cela évite les redirection inutile et améliore la performance.
+        if (location.pathname !== '/activities') {
+          navigate('/activities');
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
         // Handle error appropriately, e.g., show a user-friendly message
@@ -48,14 +53,14 @@ function Header() {
   }
 
   return (
-    <header className="flex items-center w-screen bg-green h-10 px-5 min-h-16">
+    <header className="flex items-center w-screen bg-green h-10 px-5">
       <nav className="flex justify-between items-center w-screen">
-        <Link to="/">
-          <img className="h-16" src={logo} alt="logo-site" />
+        <Link to="/" className="bg-white rounded-md md:p-1 ">
+          <img className="h-12" src={logo} alt="logo-site" />
         </Link>
 
         <form
-          className="h-12 w-full md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
+          className="h-12 w-3/4 md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
           onSubmit={handleFormSubmit}
         >
           <input
@@ -92,7 +97,7 @@ function Header() {
               <div tabIndex={0} role="button" className="btn">
                 <FontAwesomeIcon icon={faUser} />
               </div>
-              <ul className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+              <ul className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
                 {logged ? (
                   <>
                     <li>

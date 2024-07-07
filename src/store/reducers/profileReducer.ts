@@ -1,4 +1,4 @@
-import { createReducer, createAction } from '@reduxjs/toolkit';
+import { createReducer } from '@reduxjs/toolkit';
 import { Credentials, Activities } from '../../@types';
 
 // Création de l'interface (ce à quoi devra ressembler l'état)
@@ -45,10 +45,5 @@ const initialState: ActivitiesState = {
   ],
 };
 
-export const isLoggin = createAction('SETTINGS/TOGGLE_SETTINGS');
 // On créé le reducer
-export const profileReducer = createReducer(initialState, (builder) => {
-  builder.addCase(isLoggin, (state) => {
-    state.logged = !state.logged;
-  });
-});
+export const profileReducer = createReducer(initialState, (builder) => {});

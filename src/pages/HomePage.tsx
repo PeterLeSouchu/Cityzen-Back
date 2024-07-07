@@ -1,23 +1,47 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
-import {
-  updateRecentsActivities,
-  updateRatingActivities,
-} from '../store/reducers/activitiesReducer';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { Activities } from '../@types';
 
 function HomePage() {
-  const recents = useAppSelector((store) => store.activities.recents);
-  const rating = useAppSelector((store) => store.activities.topRated);
+  const [recents, setRecents] = useState<Activities[]>([]);
+  const [topRated, setTopRated] = useState<Activities[]>([]);
+
+  useEffect(() => {
+    async function fetchRecentsActivities() {
+      try {
+        const { data } = await axios.get(
+          'http://localhost:3000/activity/recent'
+        );
+        console.log(data.data);
+        setRecents(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    async function fetchTopRatedActivities() {
+      try {
+        const { data } = await axios.get(
+          'http://localhost:3000/activity/rating'
+        );
+        setTopRated(data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchRecentsActivities();
+    fetchTopRatedActivities();
+  }, []);
+
   const recentsActivities = recents.map((activity) => {
     return (
       <div
-        className="card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-base-100 min-w-44 max-w-56 w-1/4 h-60 mr-7"
         key={activity.id}
       >
-        <figure>
-          <img src={activity.image} alt="Shoes" className="object-cover" />
+        <figure className="h-2/3">
+          <img src={activity.image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -44,14 +68,15 @@ function HomePage() {
       </div>
     );
   });
-  const ratingActivities = rating.map((activity) => {
+
+  const ratingActivities = topRated.map((activity) => {
     return (
       <div
-        className="card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-base-100 min-w-44 max-w-56 w-1/4 h-60 mr-7"
         key={activity.id}
       >
-        <figure>
-          <img src={activity.image} alt="Shoes" className="object-cover" />
+        <figure className="h-2/3">
+          <img src={activity.image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -78,39 +103,36 @@ function HomePage() {
       </div>
     );
   });
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(updateRecentsActivities());
-    dispatch(updateRatingActivities());
-  }, [dispatch]);
 
   return (
     <>
-      <div className="h-screen">
-        <div className="h-full text-center font-montserrat flex flex-col justify-center gap-32">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl">
-            Vivez votre ville <br />
-            <span className="text-green">autrement</span>
-          </h2>
-        </div>
+      <div className="h-90 text-center font-montserrat flex flex-col justify-evenly">
+        <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl">
+          Vivez votre ville <br />
+          <span className="text-green">autrement</span>
+        </h2>
       </div>
 
-      <div className="h-screen bg-lightgrey flex flex-col justify-center gap-32 md:gap-24 lg:gap-16 ">
-        <div className="flex flex-col px-4 md:px-8 lg:mx-auto">
-          <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-3xl lg:text-4xl lg:mb-10">
-            Les plus récentes
-          </h3>
-          <div className="flex flex-row gap-8 overflow-x-auto max-w-screen lg:py-8">
-            {recentsActivities}
+      <div className="bg-lightgrey flex flex-col justify-between">
+        <div className="w-3/4 m-auto my-7">
+          <div className="flex flex-col w-full">
+            <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-4xl">
+              Les plus récentes
+            </h3>
+            <div className="flex flex-row overflow-x-auto  ">
+              {recentsActivities}
+            </div>
           </div>
         </div>
-        <div className="flex flex-col px-4 md:px-8 lg:mx-auto">
-          <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-3xl lg:text-4xl lg:mb-10">
-            Les mieux notées
-          </h3>
-          <div className="flex flex-row gap-8 overflow-x-auto max-w-screen lg:py-8">
-            {ratingActivities}
+        <div className="w-3/4 m-auto my-7">
+          <div className="flex flex-col w-full">
+            <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-4xl">
+              Les mieux notés
+            </h3>
+            <div className="flex flex-row overflow-x-auto  ">
+              {ratingActivities}
+            </div>
           </div>
         </div>
       </div>

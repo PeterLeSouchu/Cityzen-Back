@@ -1,13 +1,53 @@
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Map from '../components/Map';
-import ActivityCard from '../components/ActivityCard';
+import { useAppSelector } from '../hooks/redux';
 
 function ActivitiesPage() {
-  return (
-    <div className="flex flex-row">
-      <div className="flex flex-row flex-wrap gap-8 w-7/12 justify-center my-8">
-        <ActivityCard />
+  const searched = useAppSelector(
+    (store) => store.activities.searchedActivities
+  );
+  const searchedActivities = searched.map((activity) => (
+    <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
+      <figure>
+        <img
+          src={activity.image}
+          alt={activity.title}
+          className="object-cover"
+        />
+      </figure>
+      <div className="px-4 py-2">
+        <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+          {activity.title}
+        </h2>
+        <div className="flex justify-between mt-1">
+          <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
+            <FontAwesomeIcon
+              icon={faStar}
+              className="text-yellow-300 md:h-4 lg:h-5"
+            />
+            <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
+              {activity.avg_rate}
+            </span>
+          </div>
+          <div className="">
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="text-red-500 md:h-6 lg:h-8"
+            />
+          </div>
+        </div>
       </div>
-      <div className="fixed right-0 h-full w-5/12">
+    </div>
+  ));
+  return (
+    <div className="flex flex-col md:flex-row h-83">
+      <div className=" md:w-7/12  w-full py-8 h-50 md:h-83 flex justify-center overflow-scroll">
+        <div className="w-11/12 flex flex-wrap gap-5 overflow-scroll justify-center">
+          {searchedActivities}
+        </div>
+      </div>
+      <div className="right-0 md:h-83 md:w-5/12 w-full h-50 z-0">
         <Map />
       </div>
     </div>

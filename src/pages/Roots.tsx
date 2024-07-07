@@ -10,7 +10,7 @@ function Root() {
     <div>
       <Header />
       <section className=" mb-7 md:mb-0 min-h-90 ">
-        <main className="min-h-80">
+        <main className="min-h-83">
           <Outlet />
         </main>
         <Footer />
