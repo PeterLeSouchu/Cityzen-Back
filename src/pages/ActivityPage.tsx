@@ -4,6 +4,11 @@ import axios from 'axios';
 // import will from '../assets/will.webp';
 import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
 import { Activities } from '../@types';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from '../store/reducers/profileReducer';
 
 export const loadActivity = async ({
   params,
@@ -24,6 +29,19 @@ export const loadActivity = async ({
 
 function ActivityPage() {
   const activity = useLoaderData() as Activities;
+
+  const dispatch = useAppDispatch();
+
+  const myFavorites = useAppSelector((store) => store.profile.myFavorites);
+
+  async function handlerFavorites(id: number): Promise<void> {
+    if (!myFavorites.some((favActivity) => favActivity.id === id)) {
+      await dispatch(addToFavorites({ id }));
+    } else {
+      await dispatch(deleteFromFavorites({ id }));
+    }
+  }
+
   return (
     <div className="bg-white py-10 ">
       <div className="container mx-auto pl-40 p-4">
@@ -43,12 +61,22 @@ function ActivityPage() {
           <h1 className="mx-4 md:mx-8 lg:mx-16 text-3xl font-montserrats text-black">
             {activity.title}
           </h1>
-          <div className="">
+          <button
+            onClick={() => handlerFavorites(activity.id)}
+            type="button"
+            aria-label="Ajouter / supprimer des favoris"
+          >
             <FontAwesomeIcon
               icon={faHeart}
-              className="text-red-500 mr-20 md:h-6 lg:h-8"
+              className={
+                myFavorites.some(
+                  (favActivity) => favActivity.id === activity.id
+                )
+                  ? 'text-red-500 md:h-6 lg:h-8'
+                  : 'text-slate-200 md:h-6 lg:h-8'
+              }
             />
-          </div>
+          </button>
           <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4 flex mr-80">
             <FontAwesomeIcon
               icon={faStar}

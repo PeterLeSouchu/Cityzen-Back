@@ -18,3 +18,8 @@ export interface Credentials {
   pseudo: string;
   email: string;
 }
+
+export interface LoaderActivities {
+  recents: Activities[];
+  topRated: Activities[];
+}

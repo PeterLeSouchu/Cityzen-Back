@@ -15,7 +15,7 @@ import './styles/index.css';
 
 import AboutPage from './pages/AboutPage';
 import ActivityPage, { loadActivity } from './pages/ActivityPage';
-import HomePage from './pages/HomePage';
+import HomePage, { loadActivities } from './pages/HomePage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ProfilePage from './pages/ProfilePage';
 import InfosPage from './pages/InfosPage';
@@ -36,7 +36,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<NotFound />}>
-      <Route index element={<HomePage />} />
+      <Route index element={<HomePage />} loader={loadActivities} />
       <Route path="/about" element={<AboutPage />} />
       <Route
         path="/activity/:id"
