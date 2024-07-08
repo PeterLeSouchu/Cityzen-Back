@@ -1,14 +1,20 @@
 interface ModalDeleteActivityProps {
-  setModalDeleteActivity: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalType: React.Dispatch<React.SetStateAction<'edit' | 'delete' | null>>;
+  setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
+  id: number;
 }
 
 function ModalDeleteActivity({
-  setModalDeleteActivity,
+  setModalType,
+  setActivityId,
+  id,
 }: ModalDeleteActivityProps) {
   function handlerDelete(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
-    setModalDeleteActivity(false);
+    setActivityId(null);
+    setModalType(null);
+    console.log(id);
   }
 
   return (
@@ -16,7 +22,9 @@ function ModalDeleteActivity({
       <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
-            setModalDeleteActivity(false);
+            setActivityId(null);
+            setModalType(null);
+            console.log(id);
           }}
           type="button"
           className="w-full text-right"

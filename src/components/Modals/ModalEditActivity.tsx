@@ -1,12 +1,19 @@
 interface ModalEditActivityProps {
-  setModalEditActivity: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalType: React.Dispatch<React.SetStateAction<'edit' | 'delete' | null>>;
+  setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
+  id: number;
 }
 
-function ModalEditActivity({ setModalEditActivity }: ModalEditActivityProps) {
+function ModalEditActivity({
+  setModalType,
+  setActivityId,
+  id,
+}: ModalEditActivityProps) {
   function handlerRegister(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
-    setModalEditActivity(false);
+    setActivityId(null);
+    setModalType(null);
   }
 
   return (
@@ -14,7 +21,9 @@ function ModalEditActivity({ setModalEditActivity }: ModalEditActivityProps) {
       <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
-            setModalEditActivity(false);
+            setActivityId(null);
+            setModalType(null);
+            console.log(id);
           }}
           type="button"
           className="w-full text-right"

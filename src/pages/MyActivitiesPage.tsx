@@ -7,36 +7,63 @@ import ModalDeleteActivity from '../components/Modals/ModalDeleteActivity';
 import ModalEditActivity from '../components/Modals/ModalEditActivity';
 
 function MyActivitiesPage() {
-  // Pas besoin de déclarer ce state dans le store étant donné qu'il ne sert que dans ce composant, autant se simplifier la tâche et le mettre en local avec le hook useState.
+  // On créer un state local qui contient toutes nos activités
   const [myActivities, setMyActivities] = useState<Activities[]>([]);
-  const [modalDeleteActivity, setModalDeleteActivity] = useState(false);
-  const [modalEditActivity, setModalEditActivity] = useState(false);
 
-  function handlerEdit(): void {
-    setModalEditActivity((modal) => !modal);
-    console.log('object');
-  }
+  // On utilise deux state locaux, un pour le type, et l'autre pour l'id de l'activité
+  const [modalType, setModalType] = useState<'edit' | 'delete' | null>(null);
+  const [activityId, setActivityId] = useState<number | null>(null);
 
-  function handlerDelete(): void {
-    setModalDeleteActivity((modal) => !modal);
-  }
-
+  // Al'initialisation de lap gae on récupère toutes nos activités créées
   useEffect(() => {
     async function getMyActivities() {
-      const { data } = await axios.get('http://localhost:3000/profil/activity');
-      setMyActivities(data.data);
+      // const { data } = await axios.get('http://localhost:3000/profil/activity');
+      // setMyActivities(data.data);
+      setMyActivities([
+        {
+          id: 13,
+          title: 'parc bleu',
+          url: 'parc-bleu',
+          description: 'il s’agit du parc bleu blabla',
+          avg_rate: 4.8,
+          image:
+            'https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/3/regular.png',
+          address: 'rue du JS ',
+          phone: '0785475126',
+          longitude: 4.25154789,
+          latitude: 45.14789315,
+          city_id: 78,
+        },
+        {
+          id: 27,
+          title: 'resto du coin bleu',
+          url: 'resto-du-coin-bleu',
+          description: 'il s’agit du resto du coin blablabla',
+          avg_rate: 2.8,
+          image:
+            'https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/5/regular.png',
+          address: 'rue du chocolat ',
+          phone: '0784579685',
+          longitude: 7.25154789,
+          latitude: 52.14789315,
+          city_id: 78,
+        },
+      ]);
     }
     getMyActivities();
   }, []);
 
-  // const activities  = myActivities.map((myActivity) => {
-  //   return (
+  function openModal(type: 'edit' | 'delete', id: number): void {
+    setModalType(type);
+    setActivityId(id);
+  }
 
-  //   )
-  // })
-  return (
-    <div className="flex justify-center flex-wrap gap-2 p-5 ">
-      <div className=" card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl">
+  const activities = myActivities.map((myActivity) => {
+    return (
+      <div
+        key={myActivity.id}
+        className="card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
+      >
         <figure>
           <img
             src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
@@ -59,26 +86,46 @@ function MyActivitiesPage() {
               </span>
             </div>
             <div className="">
-              <button onClick={handlerEdit} type="button">
-                <FontAwesomeIcon icon={faPen} className=" md:h-6 lg:h-8 m-1" />
+              <button
+                onClick={() => openModal('edit', myActivity.id)}
+                type="button"
+              >
+                <FontAwesomeIcon icon={faPen} className="md:h-6 lg:h-8 m-1" />
               </button>
-              <button onClick={handlerDelete} type="button">
-                <FontAwesomeIcon
-                  icon={faTrash}
-                  className=" md:h-6 lg:h-8 m-1"
-                />
+              <button
+                onClick={() => openModal('delete', myActivity.id)}
+                type="button"
+              >
+                <FontAwesomeIcon icon={faTrash} className="md:h-6 lg:h-8 m-1" />
               </button>
             </div>
           </div>
         </div>
       </div>
-      {modalDeleteActivity ? (
-        <ModalDeleteActivity setModalDeleteActivity={setModalDeleteActivity} />
-      ) : null}
-      {modalEditActivity ? (
-        <ModalEditActivity setModalEditActivity={setModalEditActivity} />
-      ) : null}
+    );
+  });
+
+  return (
+    <div className="flex justify-center flex-wrap gap-2 p-5">
+      {activities}
+
+      {modalType === 'edit' && activityId !== null && (
+        <ModalEditActivity
+          id={activityId}
+          setModalType={setModalType}
+          setActivityId={setActivityId}
+        />
+      )}
+
+      {modalType === 'delete' && activityId !== null && (
+        <ModalDeleteActivity
+          id={activityId}
+          setModalType={setModalType}
+          setActivityId={setActivityId}
+        />
+      )}
     </div>
   );
 }
+
 export default MyActivitiesPage;
