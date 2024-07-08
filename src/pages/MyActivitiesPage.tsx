@@ -1,7 +1,7 @@
 import { faTrash, faStar, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Activities } from '../@types';
 import ModalDeleteActivity from '../components/Modals/ModalDeleteActivity';
 import ModalEditActivity from '../components/Modals/ModalEditActivity';
@@ -11,21 +11,29 @@ function MyActivitiesPage() {
   const [myActivities, setMyActivities] = useState<Activities[]>([]);
   const [modalDeleteActivity, setModalDeleteActivity] = useState(false);
   const [modalEditActivity, setModalEditActivity] = useState(false);
-  const navigate = useNavigate();
 
-  function handlerEdit(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerEdit(): void {
     setModalEditActivity((modal) => !modal);
     console.log('object');
   }
 
-  function handlerDelete(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerDelete(): void {
     setModalDeleteActivity((modal) => !modal);
   }
 
+  useEffect(() => {
+    async function getMyActivities() {
+      const { data } = await axios.get('http://localhost:3000/profil/activity');
+      setMyActivities(data.data);
+    }
+    getMyActivities();
+  }, []);
+
+  // const activities  = myActivities.map((myActivity) => {
+  //   return (
+
+  //   )
+  // })
   return (
     <div className="flex justify-center flex-wrap gap-2 p-5 ">
       <div className=" card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl">

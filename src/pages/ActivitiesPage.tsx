@@ -1,12 +1,29 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Map from '../components/Map';
-import { useAppSelector } from '../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from '../store/reducers/profileReducer';
 
 function ActivitiesPage() {
+  const myFavorites = useAppSelector((store) => store.profile.myFavorites);
+
+  const dispatch = useAppDispatch();
+
+  async function handlerFavorites(id: number): Promise<void> {
+    if (!myFavorites.some((favActivity) => favActivity.id === id)) {
+      await dispatch(addToFavorites({ id }));
+    } else {
+      await dispatch(deleteFromFavorites({ id }));
+    }
+  }
+
   const searched = useAppSelector(
     (store) => store.activities.searchedActivities
   );
+
   const searchedActivities = searched.map((activity) => (
     <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
       <figure>
@@ -30,12 +47,22 @@ function ActivitiesPage() {
               {activity.avg_rate}
             </span>
           </div>
-          <div className="">
+          <button
+            onClick={() => handlerFavorites(activity.id)}
+            type="button"
+            aria-label="Ajouter / supprimer des favoris"
+          >
             <FontAwesomeIcon
               icon={faHeart}
-              className="text-red-500 md:h-6 lg:h-8"
+              className={
+                myFavorites.some(
+                  (favActivity) => favActivity.id === activity.id
+                )
+                  ? 'text-red-500 md:h-6 lg:h-8'
+                  : 'text-slate-200 md:h-6 lg:h-8'
+              }
             />
-          </div>
+          </button>
         </div>
       </div>
     </div>

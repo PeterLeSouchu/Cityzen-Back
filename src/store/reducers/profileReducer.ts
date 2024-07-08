@@ -10,7 +10,7 @@ interface ActivitiesState {
 }
 
 export const addToFavorites = createAsyncThunk(
-  'PROFILE/ADD-RO-FAVORITES',
+  'PROFILE/ADD-TO-FAVORITES',
   async ({ id }: { id: number }) => {
     const { data } = await axios.post(
       'http://localhost:3000/profil/favorite',
@@ -20,12 +20,20 @@ export const addToFavorites = createAsyncThunk(
   }
 );
 export const deleteFromFavorites = createAsyncThunk(
-  'PROFILE/ADD-RO-FAVORITES',
+  'PROFILE/ADELETE-FROM-FAVORITES',
   async ({ id }: { id: number }) => {
     const { data } = await axios.delete(
       `http://localhost:3000/profil/favorite${id}`
     );
     return data as { data: number };
+  }
+);
+
+export const getFavorites = createAsyncThunk(
+  'PROFILE/GET-FAVORITES',
+  async () => {
+    const { data } = await axios.get(`http://localhost:3000/profil/favorite`);
+    return data as { data: Activities[] };
   }
 );
 
@@ -60,5 +68,8 @@ export const profileReducer = createReducer(initialState, (builder) => {
       state.myFavorites = state.myFavorites.filter(
         (activity) => activity.id !== action.payload.data
       );
+    })
+    .addCase(getFavorites.fulfilled, (state, action) => {
+      state.myFavorites = action.payload.data;
     });
 });

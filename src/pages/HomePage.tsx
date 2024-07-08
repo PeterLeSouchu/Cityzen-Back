@@ -31,11 +31,13 @@ export const loadActivities = async (): Promise<LoaderActivities> => {
 };
 
 function HomePage() {
-  const dispatch = useAppDispatch();
   const { recents, topRated } = useLoaderData() as LoaderActivities;
+
+  const dispatch = useAppDispatch();
+
   const myFavorites = useAppSelector((store) => store.profile.myFavorites);
 
-  async function handlerFavorites(id: number): void {
+  async function handlerFavorites(id: number): Promise<void> {
     if (!myFavorites.some((favActivity) => favActivity.id === id)) {
       await dispatch(addToFavorites({ id }));
     } else {
@@ -73,7 +75,13 @@ function HomePage() {
             >
               <FontAwesomeIcon
                 icon={faHeart}
-                className="text-red-500 md:h-6 lg:h-8"
+                className={
+                  myFavorites.some(
+                    (favActivity) => favActivity.id === activity.id
+                  )
+                    ? 'text-red-500 md:h-6 lg:h-8'
+                    : 'text-slate-200 md:h-6 lg:h-8'
+                }
               />
             </button>
           </div>
@@ -105,12 +113,22 @@ function HomePage() {
                 {activity.avg_rate}
               </span>
             </div>
-            <div className="">
+            <button
+              onClick={() => handlerFavorites(activity.id)}
+              type="button"
+              aria-label="Ajouter / supprimer des favoris"
+            >
               <FontAwesomeIcon
                 icon={faHeart}
-                className="text-red-500 md:h-6 lg:h-8"
+                className={
+                  myFavorites.some(
+                    (favActivity) => favActivity.id === activity.id
+                  )
+                    ? 'text-red-500 md:h-6 lg:h-8'
+                    : 'text-slate-200 md:h-6 lg:h-8'
+                }
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
