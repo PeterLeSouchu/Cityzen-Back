@@ -1,4 +1,8 @@
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import axios from 'axios';
 import { Credentials, Activities } from '../../@types';
 
@@ -29,6 +33,8 @@ export const deleteFromFavorites = createAsyncThunk(
   }
 );
 
+export const isLogged = createAction('PROFILE/IS_LOGGED');
+
 export const getFavorites = createAsyncThunk(
   'PROFILE/GET-FAVORITES',
   async () => {
@@ -39,7 +45,7 @@ export const getFavorites = createAsyncThunk(
 
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
-  logged: true,
+  logged: false,
   credentials: { pseudo: 'Tom', email: 'tom@gmail.com' },
   myFavorites: [
     {
@@ -71,5 +77,8 @@ export const profileReducer = createReducer(initialState, (builder) => {
     })
     .addCase(getFavorites.fulfilled, (state, action) => {
       state.myFavorites = action.payload.data;
+    })
+    .addCase(isLogged, (state) => {
+      state.logged = true;
     });
 });

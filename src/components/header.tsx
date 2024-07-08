@@ -11,10 +11,12 @@ import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 import { fecthActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
+import ModalSignupOTP from './Modals/ModalSignupOTP';
 
 function Header() {
   const [modalSignup, setModalSignup] = useState(false);
   const [modalSignin, setModalSignin] = useState(false);
+  const [modalSignupOTP, setModalSignupOTP] = useState(false);
 
   const location = useLocation();
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
@@ -141,8 +143,16 @@ function Header() {
           </div>
         </div>
       </nav>
-      {modalSignup ? <ModalSignup setModalSignup={setModalSignup} /> : null}
+      {modalSignup ? (
+        <ModalSignup
+          setModalSignup={setModalSignup}
+          setModalSignupOTP={setModalSignupOTP}
+        />
+      ) : null}
       {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
+      {modalSignupOTP ? (
+        <ModalSignupOTP setModalSignupOTP={setModalSignupOTP} />
+      ) : null}
     </header>
   );
 }

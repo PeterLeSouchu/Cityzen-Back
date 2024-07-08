@@ -1,10 +1,63 @@
+import axios from 'axios';
+import { useState } from 'react';
+
 interface ModalSignupProps {
   setModalSignup: React.Dispatch<React.SetStateAction<boolean>>;
+  setModalSignupOTP: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalSignup({ setModalSignup }: ModalSignupProps) {
-  function handlerRegister(): void {
-    setModalSignup(false);
+function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
+  const [pseudo, setPseudo] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+
+  async function handlerRegister(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+
+    try {
+      if (password !== passwordConfirm) {
+        alert('Passwords do not match!');
+        return;
+      }
+
+      const userData = {
+        pseudo,
+        email,
+        password,
+        passwordConfirm,
+      };
+
+      await axios.post('http://localhost:3000/signup', userData);
+
+      setPseudo('');
+      setEmail('');
+      setPassword('');
+      setPasswordConfirm('');
+      setModalSignup(false);
+      setModalSignupOTP(true);
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
+  }
+
+  function handlerPseudo(event: React.ChangeEvent<HTMLInputElement>): void {
+    setPseudo(event.target.value);
+  }
+
+  function handlerEmail(event: React.ChangeEvent<HTMLInputElement>): void {
+    setEmail(event.target.value);
+  }
+
+  function handlerPassword(event: React.ChangeEvent<HTMLInputElement>): void {
+    setPassword(event.target.value);
+  }
+  function handlerConfirmPassword(
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void {
+    setPasswordConfirm(event.target.value);
   }
 
   return (
@@ -19,14 +72,22 @@ function ModalSignup({ setModalSignup }: ModalSignupProps) {
         >
           Close
         </button>
-        <form className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
           <div className="flex flex-col">
             <label htmlFor="pseudo">Pseudo</label>
-            <input type="text" placeholder="Entrez votre pseudo" id="pseudo" />
+            <input
+              value={pseudo}
+              onChange={handlerPseudo}
+              type="text"
+              placeholder="Entrez votre pseudo"
+              id="pseudo"
+            />
           </div>
           <div className="flex flex-col">
             <label htmlFor="email">Email</label>
             <input
+              value={email}
+              onChange={handlerEmail}
               type="text"
               placeholder="Entrez votre adresse mail"
               id="email"
@@ -35,6 +96,8 @@ function ModalSignup({ setModalSignup }: ModalSignupProps) {
           <div className="flex flex-col">
             <label htmlFor="password">Mot de passe</label>
             <input
+              value={password}
+              onChange={handlerPassword}
               type="password"
               placeholder="Entrez votre mot de passe"
               id="password"
@@ -45,14 +108,14 @@ function ModalSignup({ setModalSignup }: ModalSignupProps) {
               confirmation du mot de passe
             </label>
             <input
+              value={passwordConfirm}
+              onChange={handlerConfirmPassword}
               type="password"
               placeholder="Confirmer votre mot de passe"
               id="password-confirm"
             />
           </div>
-          <button type="submit" onClick={handlerRegister}>
-            Confirmer
-          </button>
+          <button type="submit">Confirmer</button>
         </form>
       </div>
     </div>
