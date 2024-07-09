@@ -11,10 +11,12 @@ import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 import { fetchActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
+import ModalSignupOTP from './Modals/ModalSignupOTP';
 
 function Header() {
   const [modalSignup, setModalSignup] = useState(false);
   const [modalSignin, setModalSignin] = useState(false);
+  const [modalSignupOTP, setModalSignupOTP] = useState(false);
 
   const location = useLocation();
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
@@ -22,6 +24,7 @@ function Header() {
   const [country, setCountry] = useState<string>('');
   const logged = useAppSelector((store) => store.profile.logged);
 
+  console.log(logged);
   // Fonction pour controller l'input pays, en mettant ca valeur dans le state "country"
   function handlerChangeCountry(event: React.ChangeEvent<HTMLInputElement>) {
     setCountry(event.target.value);
@@ -34,7 +37,7 @@ function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleFormSubmit(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const fetchData = async () => {
@@ -54,15 +57,11 @@ function Header() {
     fetchData();
   }
 
-  function handlerSingup(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerSingup(): void {
     setModalSignup((modal) => !modal);
     setModalSignin(false);
   }
-  function handlerSingin(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerSingin(): void {
     setModalSignin((modal) => !modal);
     setModalSignup(false);
   }
@@ -76,7 +75,7 @@ function Header() {
 
         <form
           className="h-12 w-3/4 md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
-          onSubmit={handleFormSubmit}
+          onSubmit={(event) => handleFormSubmit(event)}
         >
           <input
             required
@@ -141,8 +140,16 @@ function Header() {
           </div>
         </div>
       </nav>
-      {modalSignup ? <ModalSignup setModalSignup={setModalSignup} /> : null}
+      {modalSignup ? (
+        <ModalSignup
+          setModalSignup={setModalSignup}
+          setModalSignupOTP={setModalSignupOTP}
+        />
+      ) : null}
       {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
+      {modalSignupOTP ? (
+        <ModalSignupOTP setModalSignupOTP={setModalSignupOTP} />
+      ) : null}
     </header>
   );
 }

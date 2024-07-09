@@ -1,14 +1,44 @@
-import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useAppDispatch } from '../../hooks/redux';
+import { isLogged } from '../../store/reducers/profileReducer';
 
 interface ModalSigninProps {
   setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function ModalSignin({ setModalSignin }: ModalSigninProps) {
-  function handlerRegister(): void {
-    setModalSignin(false);
+  const dispatch = useAppDispatch();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+
+  function handlerEmail(event: React.ChangeEvent<HTMLInputElement>): void {
+    setEmail(event.target.value);
+  }
+
+  function handlerPassword(event: React.ChangeEvent<HTMLInputElement>): void {
+    setPassword(event.target.value);
+  }
+
+  async function handlerRegister(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+    try {
+      const res = await axios.post('http://localhost:3000/signin', {
+        email,
+        password,
+      });
+      console.log(res.data);
+      setEmail('');
+      setPassword('');
+      dispatch(isLogged());
+      setModalSignin(false);
+    } catch (error) {
+      console.log(error);
+      setErrorMessage('Les identifiants ne correspondent pas');
+    }
   }
 
   const [login, setLogin] = useState('');
@@ -44,30 +74,29 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
         >
           Close
         </button>
-        <form onSubmit={onSubmit} className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
+          {errorMessage ? <p>{errorMessage}</p> : null}
           <div className="flex flex-col">
             <label htmlFor="email">Email</label>
             <input
+              value={email}
+              onChange={(e) => handlerEmail(e)}
               type="text"
               placeholder="Entrez votre adresse mail"
               id="email="
-              value={login}
-              onChange={(e) => setLogin(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
             <label htmlFor="password">Mot de passe</label>
             <input
+              value={password}
+              onChange={(e) => handlerPassword(e)}
               type="password"
               placeholder="Entrez votre mot de passe"
               id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <button type="submit" onClick={handlerRegister}>
-            Confirmer
-          </button>
+          <button type="submit">Confirmer</button>
         </form>
       </div>
     </div>
