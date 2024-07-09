@@ -24,6 +24,7 @@ function Header() {
   const [country, setCountry] = useState<string>('');
   const logged = useAppSelector((store) => store.profile.logged);
 
+  console.log(logged);
   // Fonction pour controller l'input pays, en mettant ca valeur dans le state "country"
   function handlerChangeCountry(event: React.ChangeEvent<HTMLInputElement>) {
     setCountry(event.target.value);
@@ -56,15 +57,11 @@ function Header() {
     fetchData();
   }
 
-  function handlerSingup(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerSingup(): void {
     setModalSignup((modal) => !modal);
     setModalSignin(false);
   }
-  function handlerSingin(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerSingin(): void {
     setModalSignin((modal) => !modal);
     setModalSignup(false);
   }

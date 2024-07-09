@@ -10,27 +10,34 @@ interface ModalSignupOTPProps {
 function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
   const dispatch = useAppDispatch();
   const [code, setCode] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>();
+  const [errorMessage, setErrorMessage] = useState<string>('');
 
-  async function handlerRegister(e: React.FormEvent<HTMLFormElement>): void {
+  async function handlerRegister(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
     e.preventDefault();
     try {
-      await axios.post(
+      const res = await axios.post(
         'http://localhost:3000/signup/confirmation',
         { OTP: code },
         { withCredentials: true }
       );
 
+      console.log(res.data);
+
+      setErrorMessage('');
       dispatch(isLogged());
       setCode('');
       setModalSignupOTP(false);
     } catch (error) {
       console.error('There was an error!', error);
+
+      setErrorMessage('Les codes ne correspondent pas');
     }
   }
 
-  function handlerCode(event: React.ChangeEvent<HTMLInputElement>): void {
-    setCode(event.target.value);
+  function handlerCode(e: React.ChangeEvent<HTMLInputElement>): void {
+    setCode(e.target.value);
   }
 
   return (
@@ -53,7 +60,7 @@ function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
             </label>
             <input
               value={code}
-              onChange={handlerCode}
+              onChange={(e) => handlerCode(e)}
               type="text"
               placeholder="Entrez votre code OTP"
               id="otp"

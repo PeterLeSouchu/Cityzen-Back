@@ -32,7 +32,9 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
         passwordConfirm,
       };
 
-      await axios.post('http://localhost:3000/signup', userData);
+      const res = await axios.post('http://localhost:3000/signup', userData, {
+        withCredentials: true,
+      });
 
       setPseudo('');
       setEmail('');
@@ -40,31 +42,33 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
       setPasswordConfirm('');
       setModalSignup(false);
       setModalSignupOTP(true);
+      console.log(res.data);
     } catch (error) {
       console.error('There was an error!', error);
+      setErrorMessage(error.response.data.error);
     }
   }
 
-  function handlerPseudo(event: React.ChangeEvent<HTMLInputElement>): void {
-    setPseudo(event.target.value);
+  function handlerPseudo(e: React.ChangeEvent<HTMLInputElement>): void {
+    setPseudo(e.target.value);
   }
 
-  function handlerEmail(event: React.ChangeEvent<HTMLInputElement>): void {
-    setEmail(event.target.value);
+  function handlerEmail(e: React.ChangeEvent<HTMLInputElement>): void {
+    setEmail(e.target.value);
   }
 
-  function handlerPassword(event: React.ChangeEvent<HTMLInputElement>): void {
-    setPassword(event.target.value);
+  function handlerPassword(e: React.ChangeEvent<HTMLInputElement>): void {
+    setPassword(e.target.value);
   }
   function handlerConfirmPassword(
-    event: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ): void {
-    setPasswordConfirm(event.target.value);
+    setPasswordConfirm(e.target.value);
   }
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
+      <div className="z-50 w-2/5 min-h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
             setModalSignup(false);
@@ -79,7 +83,7 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
             <label htmlFor="pseudo">Pseudo</label>
             <input
               value={pseudo}
-              onChange={handlerPseudo}
+              onChange={(e) => handlerPseudo(e)}
               type="text"
               placeholder="Entrez votre pseudo"
               id="pseudo"
@@ -89,17 +93,18 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
             <label htmlFor="email">Email</label>
             <input
               value={email}
-              onChange={handlerEmail}
+              onChange={(e) => handlerEmail(e)}
               type="text"
               placeholder="Entrez votre adresse mail"
               id="email"
             />
           </div>
           <div className="flex flex-col">
+            {errorMessage ? <p>{errorMessage}</p> : null}
             <label htmlFor="password">Mot de passe</label>
             <input
               value={password}
-              onChange={handlerPassword}
+              onChange={(e) => handlerPassword(e)}
               type="password"
               placeholder="Entrez votre mot de passe"
               id="password"
@@ -111,10 +116,10 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
             </label>
             <input
               value={passwordConfirm}
-              onChange={handlerConfirmPassword}
+              onChange={(e) => handlerConfirmPassword(e)}
               type="password"
               placeholder="Confirmer votre mot de passe"
-              id="password-confirm"
+              id="password-(e) => confirm"
             />
           </div>
           <button type="submit">Confirmer</button>
