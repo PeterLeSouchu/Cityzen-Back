@@ -7,40 +7,43 @@ interface ActivitiesState {
   searchedActivities: Activities[];
 }
 
-export const fecthActivitiesByCountryCity = createAsyncThunk(
+export const fetchActivitiesByCountryCity = createAsyncThunk(
   'ACTIVITIES/FETCH_BY_COUNTRY_CITY',
   async ({ country, city }: { country: string; city: string }) => {
-    const { data } = await axios.get(
-      `http://localhost:3000/activity/${country}/${city}`
-    );
-    return data as { data: Activities[] };
+    // API externe (temporaire)
+    const options = {
+      method: 'GET',
+      url: `http://localhost:3000/activity/${country}/${city}`,
+    };
+    const { data } = await axios.request(options);
+    console.log(data);
+
+    // compléter avec les données de notre API
+    return data.map((activity: Activities[]) => ({
+      id: activity.id,
+      title: activity.title,
+      url: activity.url,
+      description: activity.description,
+      avg_rate: activity.avg_rate,
+      image: activity.image,
+      address: activity.address,
+      phone: activity.phone,
+      latitude: activity.latitude,
+      longitude: activity.longitude,
+      city_id: activity.city_id,
+    })) as Activities[];
   }
 );
 
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
-  searchedActivities: [
-    {
-      id: 2,
-      title: 'test',
-      url: 'test',
-      description: 'test',
-      avg_rate: 2,
-      image:
-        'https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/13/regular.png',
-      address: 'test',
-      phone: 'test',
-      latitude: 2,
-      longitude: 2,
-      city_id: 2,
-    },
-  ],
+  searchedActivities: [],
 };
 
 // On créé le reducer
 export const activitiesReducer = createReducer(initialState, (builder) => {
-  builder.addCase(fecthActivitiesByCountryCity.fulfilled, (state, action) => {
-    state.searchedActivities = action.payload.data;
+  builder.addCase(fetchActivitiesByCountryCity.fulfilled, (state, action) => {
+    state.searchedActivities = action.payload;
   });
   //
 });

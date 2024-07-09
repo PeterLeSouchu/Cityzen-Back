@@ -20,12 +20,22 @@ function NotFound() {
   }
 
   return (
-    <div className="not-found">
-      <h1>404</h1>
-      <p>Désolé, une erreur inattendue est survenue.</p>
-      <p>
-        <i>{getErrorMessage(error)}</i>
-      </p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white">
+      <div className="text-center">
+        <h1 className="text-9xl font-montserrat text-gray-600">404</h1>
+        <p className="text-lg font-montserrat text-gray-600 mt-2">
+          Désolé, nous n'avons pas pu trouver la page que vous recherchez.
+        </p>
+        <p className="text-md text-gray-500 mt-4">
+          <i>{getErrorMessage(error)}</i>
+        </p>
+        <a
+          href="/"
+          className="bg-green mt-10 inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-md hover:bg-blue-600 transition duration-300"
+        >
+          Retour à l'accueil
+        </a>
+      </div>
     </div>
   );
 }
