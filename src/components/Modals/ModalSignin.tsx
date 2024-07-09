@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 interface ModalSigninProps {
   setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -6,6 +10,27 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
   function handlerRegister(): void {
     setModalSignin(false);
   }
+
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:3000/', {
+        email: login,
+        password,
+      });
+      navigate('/profile');
+    } catch {
+      error;
+    }
+    {
+      setError('Veuillez verifier votre email ou mot de passe');
+    }
+  };
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
@@ -19,13 +44,15 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
         >
           Close
         </button>
-        <form className="flex flex-col">
+        <form onSubmit={onSubmit} className="flex flex-col">
           <div className="flex flex-col">
             <label htmlFor="email">Email</label>
             <input
               type="text"
               placeholder="Entrez votre adresse mail"
-              id="email"
+              id="email="
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
@@ -34,6 +61,8 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
               type="password"
               placeholder="Entrez votre mot de passe"
               id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button type="submit" onClick={handlerRegister}>
@@ -44,4 +73,5 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
     </div>
   );
 }
+
 export default ModalSignin;
