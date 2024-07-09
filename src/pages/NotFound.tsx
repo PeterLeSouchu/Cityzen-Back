@@ -1,5 +1,4 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
-import header from '../components/Header';
 
 function NotFound() {
   const error = useRouteError();
@@ -23,7 +22,7 @@ function NotFound() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-white">
       <div className="text-center">
-        <h1 className="text-9xl font-montserrat text-blue-500">404</h1>
+        <h1 className="text-9xl font-montserrat text-gray-600">404</h1>
         <p className="text-lg font-montserrat text-gray-600 mt-2">
           Désolé, nous n'avons pas pu trouver la page que vous recherchez.
         </p>
