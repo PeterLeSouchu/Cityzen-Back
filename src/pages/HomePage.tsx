@@ -1,37 +1,49 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import axios from 'axios';
-import { Activities } from '../@types';
+import { Activities, LoaderActivities } from '../@types';
+import { useAppSelector, useAppDispatch } from '../hooks/redux';
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from '../store/reducers/profileReducer';
+
+export const loadActivities = async (): Promise<LoaderActivities> => {
+  try {
+    const [recentsResponse, topRatedResponse] = await Promise.all([
+      axios.get<{ data: Activities[] }>(
+        'http://localhost:3000/activity/recent'
+      ),
+      axios.get<{ data: Activities[] }>(
+        'http://localhost:3000/activity/rating'
+      ),
+    ]);
+
+    return {
+      recents: recentsResponse.data.data,
+      topRated: topRatedResponse.data.data,
+    };
+  } catch (error: unknown) {
+    console.error('Error loading data:', error);
+    throw new Error("Oops, les données n'ont pas pu être chargées");
+  }
+};
 
 function HomePage() {
-  const [recents, setRecents] = useState<Activities[]>([]);
-  const [topRated, setTopRated] = useState<Activities[]>([]);
+  const { recents, topRated } = useLoaderData() as LoaderActivities;
 
-  useEffect(() => {
-    async function fetchRecentsActivities() {
-      try {
-        const { data } = await axios.get(
-          'http://localhost:3000/activity/recent'
-        );
-        setRecents(data.data);
-      } catch (error) {
-        console.error(error);
-      }
+  const dispatch = useAppDispatch();
+
+  const myFavorites = useAppSelector((store) => store.profile.myFavorites);
+
+  async function handlerFavorites(id: number): Promise<void> {
+    if (!myFavorites.some((favActivity) => favActivity.id === id)) {
+      await dispatch(addToFavorites({ id }));
+    } else {
+      await dispatch(deleteFromFavorites({ id }));
     }
-    async function fetchTopRatedActivities() {
-      try {
-        const { data } = await axios.get(
-          'http://localhost:3000/activity/rating'
-        );
-        setTopRated(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchRecentsActivities();
-    fetchTopRatedActivities();
-  }, []);
+  }
 
   const recentsActivities = recents.map((activity) => {
     return (
@@ -56,12 +68,22 @@ function HomePage() {
                 {activity.avg_rate}
               </span>
             </div>
-            <div className="">
+            <button
+              onClick={() => handlerFavorites(activity.id)}
+              type="button"
+              aria-label="Ajouter / supprimer des favoris"
+            >
               <FontAwesomeIcon
                 icon={faHeart}
-                className="text-red-500 md:h-6 lg:h-8"
+                className={
+                  myFavorites.some(
+                    (favActivity) => favActivity.id === activity.id
+                  )
+                    ? 'text-red-500 md:h-6 lg:h-8'
+                    : 'text-slate-200 md:h-6 lg:h-8'
+                }
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>
@@ -91,12 +113,22 @@ function HomePage() {
                 {activity.avg_rate}
               </span>
             </div>
-            <div className="">
+            <button
+              onClick={() => handlerFavorites(activity.id)}
+              type="button"
+              aria-label="Ajouter / supprimer des favoris"
+            >
               <FontAwesomeIcon
                 icon={faHeart}
-                className="text-red-500 md:h-6 lg:h-8"
+                className={
+                  myFavorites.some(
+                    (favActivity) => favActivity.id === activity.id
+                  )
+                    ? 'text-red-500 md:h-6 lg:h-8'
+                    : 'text-slate-200 md:h-6 lg:h-8'
+                }
               />
-            </div>
+            </button>
           </div>
         </div>
       </div>

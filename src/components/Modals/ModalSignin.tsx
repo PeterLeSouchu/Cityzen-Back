@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-interface ModalSignupProps {
+interface ModalSigninProps {
   setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ModalSignin({ setModalSignin }: ModalSignupProps) {
-  function handlerRegister(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+function ModalSignin({ setModalSignin }: ModalSigninProps) {
+  function handlerRegister(): void {
     setModalSignin(false);
   }
 
