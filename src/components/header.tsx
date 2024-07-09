@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
-import { fecthActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
+import { fetchActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
 
 function Header() {
   const [modalSignup, setModalSignup] = useState(false);
@@ -39,7 +39,7 @@ function Header() {
 
     const fetchData = async () => {
       try {
-        await dispatch(fecthActivitiesByCountryCity({ country, city }));
+        await dispatch(fetchActivitiesByCountryCity({ country, city }));
 
         // Si l'url est différente de '/activities' alors on redirige, cela évite les redirection inutile et améliore la performance.
         if (location.pathname !== '/activities') {
