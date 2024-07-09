@@ -44,19 +44,18 @@ const router = createBrowserRouter(
         loader={loadActivity}
       />
       <Route path="/activities" element={<ActivitiesPage />} />
-      <Route path="/about" element={<AboutPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<ProfilePage />}>
+          <Route index element={<InfosPage />} />
           <Route path="/profile/favorites" element={<FavoritePage />} />
           <Route path="/profile/my-activities" element={<MyActivitiesPage />} />
-          <Route index element={<InfosPage />} />
         </Route>
       </Route>
     </Route>
   )
 );
 
-// Ici on utilise le stricmode pour nous aider à detecter les problèmes pendant la phase de dev uniquement.
+// Ici on utilise le strictmode pour nous aider à detecter les problèmes pendant la phase de dev uniquement.
 // Puis on ajoute notre store au router
 root.render(
   <React.StrictMode>

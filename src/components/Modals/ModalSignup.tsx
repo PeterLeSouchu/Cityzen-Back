@@ -11,15 +11,17 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [passwordConfirm, setPasswordConfirm] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>();
 
   async function handlerRegister(
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+    setErrorMessage('');
 
     try {
       if (password !== passwordConfirm) {
-        alert('Passwords do not match!');
+        setErrorMessage('Les mots de passe ne correspondent pas');
         return;
       }
 

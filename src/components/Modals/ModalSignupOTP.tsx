@@ -9,20 +9,18 @@ interface ModalSignupOTPProps {
 
 function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
   const dispatch = useAppDispatch();
-  const [code, setCode] = useState<string>();
+  const [code, setCode] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>();
 
-  async function handlerRegister(e: React.FormEvent<HTMLButtonElement>): void {
+  async function handlerRegister(e: React.FormEvent<HTMLFormElement>): void {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      await axios.post(
         'http://localhost:3000/signup/confirmation',
-        code
+        { OTP: code },
+        { withCredentials: true }
       );
-      if (res.status === 400) {
-        console.log(res.data.error);
-        setErrorMessage(res.data.error);
-      }
+
       dispatch(isLogged());
       setCode('');
       setModalSignupOTP(false);
@@ -47,7 +45,7 @@ function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
         >
           Close
         </button>
-        <form className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
           <div className="flex flex-col">
             {errorMessage ? <p>{errorMessage}</p> : null}
             <label htmlFor="otp">
@@ -61,9 +59,7 @@ function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
               id="otp"
             />
           </div>
-          <button type="submit" onSubmit={(e) => handlerRegister(e)}>
-            Confirmer
-          </button>
+          <button type="submit">Confirmer</button>
         </form>
       </div>
     </div>

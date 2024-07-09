@@ -36,7 +36,7 @@ function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleFormSubmit(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const fetchData = async () => {
@@ -78,7 +78,7 @@ function Header() {
 
         <form
           className="h-12 w-3/4 md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
-          onSubmit={handleFormSubmit}
+          onSubmit={(event) => handleFormSubmit(event)}
         >
           <input
             required
