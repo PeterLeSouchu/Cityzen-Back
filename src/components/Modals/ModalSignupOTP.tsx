@@ -1,13 +1,15 @@
 import axios from 'axios';
+import { Id } from 'react-toastify';
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { getFavorites, login } from '../../store/reducers/profileReducer';
 
 interface ModalSignupOTPProps {
   setModalSignupOTP: React.Dispatch<React.SetStateAction<boolean>>;
+  notify: () => Id;
 }
 
-function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
+function ModalSignupOTP({ setModalSignupOTP, notify }: ModalSignupOTPProps) {
   const dispatch = useAppDispatch();
   const [code, setCode] = useState<string>('');
   const [errorMessage, setErrorMessage] = useState<string>('');
@@ -30,6 +32,7 @@ function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
       dispatch(getFavorites());
       setCode('');
       setModalSignupOTP(false);
+      notify();
     } catch (error) {
       console.error('There was an error!', error);
 

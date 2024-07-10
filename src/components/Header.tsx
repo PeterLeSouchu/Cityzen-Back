@@ -1,6 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   faMagnifyingGlass,
   faCircleInfo,
@@ -15,6 +18,19 @@ import ModalSignupOTP from './Modals/ModalSignupOTP';
 import { logout } from '../store/reducers/profileReducer';
 
 function Header() {
+  const notify = () =>
+    toast.success('Inscription réussi', {
+      position: 'top-left',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light',
+      transition: Slide,
+    });
+
   const [modalSignup, setModalSignup] = useState(false);
   const [modalSignin, setModalSignin] = useState(false);
   const [modalSignupOTP, setModalSignupOTP] = useState(false);
@@ -154,8 +170,21 @@ function Header() {
       ) : null}
       {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
       {modalSignupOTP ? (
-        <ModalSignupOTP setModalSignupOTP={setModalSignupOTP} />
+        <ModalSignupOTP notify={notify} setModalSignupOTP={setModalSignupOTP} />
       ) : null}
+      <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </header>
   );
 }
