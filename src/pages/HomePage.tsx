@@ -16,6 +16,8 @@ export const loadActivities = async (): Promise<LoaderActivities> => {
       axios.get<Activities[]>('http://localhost:3000/activity/rating'),
     ]);
 
+    console.log(recentsResponse);
+
     return {
       recents: recentsResponse.data,
       topRated: topRatedResponse.data,
@@ -48,7 +50,7 @@ function HomePage() {
         key={activity.id}
       >
         <figure className="h-2/3">
-          <img src={activity.image} alt={activity.title} />
+          <img src={activity.url_image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -61,7 +63,7 @@ function HomePage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
             <button
@@ -93,7 +95,7 @@ function HomePage() {
         key={activity.id}
       >
         <figure className="h-2/3">
-          <img src={activity.image} alt={activity.title} />
+          <img src={activity.url_image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -106,7 +108,7 @@ function HomePage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
             <button
