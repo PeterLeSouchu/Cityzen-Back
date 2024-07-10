@@ -33,7 +33,7 @@ function ActivityPage() {
         <div className="flex flex-col md:flex-row gap-2">
           <div className="flex-1 md:flex-2">
             <img
-              src={activity.image}
+              src={activity.url_image}
               alt={activity.title}
               className="w-full h-full object-cover rounded-lg"
             />
