@@ -25,6 +25,13 @@ function ActivitiesPage() {
     }
   }
 
+
+  const searched = useAppSelector(
+    (store) => store.activities.searchedActivities
+  );
+  console.log(searched);
+
+
   const searchedActivities = searched.map((activity) => (
     <Link
       to={`/activity/${activity.slug}`}

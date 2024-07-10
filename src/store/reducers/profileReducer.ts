@@ -18,67 +18,71 @@ export const addToFavorites = createAsyncThunk(
   async ({ id }: { id: number }) => {
     const { data } = await axios.post(
       'http://localhost:3000/profil/favorite',
-      id
+      { id },
+      {
+        withCredentials: true,
+      }
     );
-    return data as { data: Activities };
+    return data.data as Activities;
   }
 );
 export const deleteFromFavorites = createAsyncThunk(
   'PROFILE/ADELETE-FROM-FAVORITES',
   async ({ id }: { id: number }) => {
     const { data } = await axios.delete(
-      `http://localhost:3000/profil/favorite${id}`
+      `http://localhost:3000/profil/favorite/${id}`,
+      {
+        withCredentials: true,
+      }
     );
-    return data as { data: number };
+    return data.data.id as number;
   }
 );
-
-export const isLogged = createAction('PROFILE/IS_LOGGED');
 
 export const getFavorites = createAsyncThunk(
   'PROFILE/GET-FAVORITES',
   async () => {
-    const { data } = await axios.get(`http://localhost:3000/profil/favorite`);
-    return data as { data: Activities[] };
+    const { data } = await axios.get(`http://localhost:3000/profil/favorite`, {
+      withCredentials: true,
+    });
+    console.log(data.data);
+    return data.data as Activities[];
   }
 );
 
+export const login = createAction('PROFILE/LOGIN');
+export const logout = createAction('PROFILE/LOGOUT');
+
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
-  logged: false,
+  logged: JSON.parse(localStorage.getItem('logged') || 'false'),
   credentials: { pseudo: 'Tom', email: 'tom@gmail.com' },
-  myFavorites: [
-    {
-      id: 2,
-      title: 'test',
-      url: 'test',
-      description: 'test',
-      avg_rate: 2,
-      image: 'test',
-      address: 'test',
-      phone: 'test',
-      latitude: 2,
-      longitude: 2,
-      city_id: 2,
-    },
-  ],
+  myFavorites: JSON.parse(localStorage.getItem('myFavorites') || '[]'),
 };
 
 // On créé le reducer
 export const profileReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(addToFavorites.fulfilled, (state, action) => {
-      state.myFavorites.push(action.payload.data);
+      state.myFavorites.push(action.payload);
+      localStorage.setItem('myFavorites', JSON.stringify(state.myFavorites));
     })
     .addCase(deleteFromFavorites.fulfilled, (state, action) => {
       state.myFavorites = state.myFavorites.filter(
-        (activity) => activity.id !== action.payload.data
+        (activity) => activity.id !== action.payload
       );
+      localStorage.setItem('myFavorites', JSON.stringify(state.myFavorites));
     })
     .addCase(getFavorites.fulfilled, (state, action) => {
-      state.myFavorites = action.payload.data;
+      state.myFavorites = action.payload;
+      localStorage.setItem('myFavorites', JSON.stringify(action.payload));
     })
-    .addCase(isLogged, (state) => {
+    .addCase(login, (state) => {
       state.logged = true;
+      localStorage.setItem('logged', 'true');
+    })
+    .addCase(logout, (state) => {
+      state.logged = false;
+      localStorage.setItem('logged', 'false');
     });
 });

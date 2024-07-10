@@ -12,6 +12,7 @@ import ModalSignin from './Modals/ModalSignin';
 import logo from '../assets/logo.png';
 import { fetchActivitiesByCountryCity } from '../store/reducers/activitiesReducer';
 import ModalSignupOTP from './Modals/ModalSignupOTP';
+import { logout } from '../store/reducers/profileReducer';
 
 function Header() {
   const [modalSignup, setModalSignup] = useState(false);
@@ -63,6 +64,10 @@ function Header() {
   function handlerSingin(): void {
     setModalSignin((modal) => !modal);
     setModalSignup(false);
+  }
+
+  function handlerLogout(): void {
+    dispatch(logout());
   }
 
   return (
@@ -117,7 +122,9 @@ function Header() {
                       <Link to="/profile">Mon profil</Link>
                     </li>
                     <li>
-                      <Link to="/">Se déconnecter</Link>
+                      <Link onClick={handlerLogout} to="/">
+                        Se déconnecter
+                      </Link>
                     </li>
                   </>
                 ) : (

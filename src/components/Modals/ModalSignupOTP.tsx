@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
-import { isLogged } from '../../store/reducers/profileReducer';
+import { getFavorites, login } from '../../store/reducers/profileReducer';
 
 interface ModalSignupOTPProps {
   setModalSignupOTP: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,7 +26,8 @@ function ModalSignupOTP({ setModalSignupOTP }: ModalSignupOTPProps) {
       console.log(res.data);
 
       setErrorMessage('');
-      dispatch(isLogged());
+      dispatch(login());
+      dispatch(getFavorites());
       setCode('');
       setModalSignupOTP(false);
     } catch (error) {

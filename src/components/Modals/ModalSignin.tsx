@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
-import { isLogged } from '../../store/reducers/profileReducer';
+import { getFavorites, login } from '../../store/reducers/profileReducer';
 
 interface ModalSigninProps {
   setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -26,14 +26,21 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
   ): Promise<void> {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/signin', {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        'http://localhost:3000/signin',
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res.data);
       setEmail('');
       setPassword('');
-      dispatch(isLogged());
+      dispatch(login());
+      dispatch(getFavorites());
       setModalSignin(false);
     } catch (error) {
       console.log(error);

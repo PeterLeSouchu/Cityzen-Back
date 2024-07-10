@@ -17,6 +17,9 @@ export const fetchActivitiesByCountryCity = createAsyncThunk(
     };
     const { data } = await axios.request(options);
 
+    // if (data.length === 0) {
+
+    // }
     // compléter avec les données de notre API
     return data as Activities[];
   }
@@ -29,8 +32,12 @@ const initialState: ActivitiesState = {
 
 // On créé le reducer
 export const activitiesReducer = createReducer(initialState, (builder) => {
-  builder.addCase(fetchActivitiesByCountryCity.fulfilled, (state, action) => {
-    state.searchedActivities = action.payload;
-  });
+  builder
+    .addCase(fetchActivitiesByCountryCity.fulfilled, (state, action) => {
+      state.searchedActivities = action.payload;
+    })
+    .addCase(fetchActivitiesByCountryCity.rejected, (state) => {
+      state.searchedActivities = [];
+    });
   //
 });
