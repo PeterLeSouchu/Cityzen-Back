@@ -68,6 +68,7 @@ function Header() {
 
   const changeCountryInput = (searchTerm: string) => {
     setCountry(searchTerm);
+    setCountrySuggestions([]);
   };
 
   // Fonction pour controller l'input ville, en mettant ca valeur dans le state "city"
@@ -105,6 +106,7 @@ function Header() {
 
   const changeCityInput = (searchTerm: string) => {
     setCity(searchTerm);
+    setCitySuggestions([]);
   };
 
   const dispatch = useAppDispatch();
