@@ -6,6 +6,7 @@ import {
   faCircleInfo,
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import ModalSignup from './Modals/ModalSignup';
 import ModalSignin from './Modals/ModalSignin';
@@ -22,16 +23,89 @@ function Header() {
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
+  const [countrySuggestions, setCountrySuggestions] = useState('');
+  const [citySuggestions, setCitySuggestions] = useState('');
+
   const logged = useAppSelector((store) => store.profile.logged);
 
   // Fonction pour controller l'input pays, en mettant ca valeur dans le state "country"
-  function handlerChangeCountry(event: React.ChangeEvent<HTMLInputElement>) {
-    setCountry(event.target.value);
+  async function handlerChangeCountry(
+    event: React.ChangeEvent<HTMLInputElement>
+  ) {
+    const inputValue = event.target.value;
+    setCountry(inputValue);
+
+    try {
+      if (inputValue.trim() === '') {
+        setCountrySuggestions([]);
+        return;
+      }
+
+      const response = await axios.get(
+        `http://localhost:3000/country/${country}`,
+        {
+          params: {
+            limit: 5,
+          },
+        }
+      );
+
+      console.log(response);
+
+      const suggestions = response.data.map((suggestedCountry) => ({
+        id: suggestedCountry.id,
+        name: suggestedCountry.name,
+      }));
+
+      console.log(response.data);
+
+      setCountrySuggestions(suggestions);
+    } catch (error) {
+      console.error(error);
+      setCountrySuggestions([]);
+    }
   }
+
+  const changeCountryInput = (searchTerm: string) => {
+    setCountry(searchTerm);
+  };
+
   // Fonction pour controller l'input ville, en mettant ca valeur dans le state "city"
-  function handlerChangeCity(event: React.ChangeEvent<HTMLInputElement>) {
-    setCity(event.target.value);
+  async function handlerChangeCity(event: React.ChangeEvent<HTMLInputElement>) {
+    const inputValue = event.target.value;
+    setCity(inputValue);
+
+    try {
+      if (inputValue.trim() === '') {
+        setCitySuggestions([]);
+        return;
+      }
+
+      const response = await axios.get(`http://localhost:3000/city/${city}`, {
+        params: {
+          limit: 5,
+        },
+      });
+
+      console.log(response);
+
+      const suggestions = response.data.map((suggestedCity) => ({
+        id: suggestedCity.id,
+        name: suggestedCity.name,
+      }));
+
+      console.log(response.data);
+
+      setCitySuggestions(suggestions);
+    } catch (error) {
+      console.error(error);
+      setCitySuggestions([]);
+    }
   }
+
+  const changeCityInput = (searchTerm: string) => {
+    setCity(searchTerm);
+  };
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -73,33 +147,65 @@ function Header() {
         </Link>
 
         <form
-          className="h-12 w-3/4 md:w-1/2 flex justify-center bg-whiteP rounded-md items-center"
+          className="h-12 w-3/4 md:w-1/2 bg-whiteP rounded-md items-center"
           onSubmit={(event) => handleFormSubmit(event)}
         >
-          <input
-            required
-            onChange={handlerChangeCountry}
-            value={country}
-            type="text"
-            placeholder="Pays"
-            className="rounded-l w-1/2 p-2 
+          <div className="flex flex-row h-full">
+            <div className="w-1/2">
+              <input
+                required
+                onChange={handlerChangeCountry}
+                value={country}
+                type="text"
+                placeholder="Pays"
+                className="h-full rounded-l w-full p-2 
       outline-none"
-          />
-          <span className="text-grey flex justify-center items-center h-16">
-            |
-          </span>
-          <input
-            required
-            onChange={handlerChangeCity}
-            value={city}
-            type="text"
-            placeholder="Ville"
-            className="rounded-r w-1/2 p-2 
+              />
+              {countrySuggestions.length > 0 && (
+                <div className="flex flex-col">
+                  {countrySuggestions.map((suggestion, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      className="btn const limitedResponse = response.data.slice(0, 5);"
+                      onClick={() => changeCountryInput(suggestion.name)}
+                    >
+                      {suggestion.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <span className="text-grey flex items-center">|</span>
+            <div className="w-1/2">
+              <input
+                required
+                onChange={handlerChangeCity}
+                value={city}
+                type="text"
+                placeholder="Ville"
+                className="h-full rounded-l w-full p-2 
       outline-none"
-          />
-          <button type="submit" className="rounded-r-md ml-2 p-2">
-            <FontAwesomeIcon icon={faMagnifyingGlass} className="h-6" />
-          </button>
+              />
+              {citySuggestions.length > 0 && (
+                <div className="flex flex-col">
+                  {citySuggestions.map((suggestion, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      className="btn const limitedResponse = response.data.slice(0, 5);"
+                      onClick={() => changeCityInput(suggestion.name)}
+                    >
+                      {suggestion.name}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+            <button type="submit" className="rounded-r-md ml-2 p-2">
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="h-6" />
+            </button>
+          </div>
         </form>
         <div className="justify-between items-center hidden md:flex">
           <Link to="/about" className="w-16">
