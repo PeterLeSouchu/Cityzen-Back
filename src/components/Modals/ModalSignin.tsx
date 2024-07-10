@@ -41,27 +41,6 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
     }
   }
 
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
-
-  const onSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:3000/', {
-        email: login,
-        password,
-      });
-      navigate('/profile');
-    } catch {
-      error;
-    }
-    {
-      setError('Veuillez verifier votre email ou mot de passe');
-    }
-  };
-
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
       <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
