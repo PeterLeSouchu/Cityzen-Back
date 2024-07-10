@@ -1,5 +1,6 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import Map from '../components/Map';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
@@ -9,6 +10,10 @@ import {
 
 function ActivitiesPage() {
   const myFavorites = useAppSelector((store) => store.profile.myFavorites);
+
+  const searched = useAppSelector((store) => {
+    return store.activities.searchedActivities;
+  });
 
   const dispatch = useAppDispatch();
 
@@ -20,14 +25,9 @@ function ActivitiesPage() {
     }
   }
 
-  const searched = useAppSelector(
-    (store) => store.activities.searchedActivities
-  );
-
   const searchedActivities = searched.map((activity) => (
-    <a
-      href="/activity"
-      target="_blank"
+    <Link
+      to={`/activity/${activity.slug}`}
       className="card w-60 h-60 lg:shadow-xl cursor-pointer"
       key={activity.id}
     >
@@ -70,7 +70,7 @@ function ActivitiesPage() {
           </button>
         </div>
       </div>
-    </a>
+    </Link>
   ));
   return (
     <div className="flex flex-col md:flex-row h-83">

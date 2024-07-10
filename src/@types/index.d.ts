@@ -1,6 +1,7 @@
 // Type d'une activité
 export interface Activities {
   id: number;
+  slug: string;
   title: string;
   url: string;
   description: string;

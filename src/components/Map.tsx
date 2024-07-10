@@ -3,9 +3,10 @@ import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import markerIcon from '../assets/marker.png';
 import { useAppSelector } from '../hooks/redux';
-import { useEffect, useState } from 'react';
 
 const customIcon = L.icon({
   iconUrl: markerIcon,
@@ -34,10 +35,18 @@ function Map() {
     return null;
   }
 
-  const markers = searched.map((activity) => ({
+  const activities = searched.map((activity) => ({
     geocode: [activity.latitude, activity.longitude],
+    id: activity.id,
+    slug: activity.slug,
     title: activity.title,
+    url: activity.url,
+    description: activity.description,
+    avg_rate: activity.avg_rate,
     image: activity.image,
+    address: activity.address,
+    phone: activity.phone,
+    city_id: activity.city_id,
   }));
 
   return (
@@ -52,15 +61,15 @@ function Map() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://api.maptiler.com/maps/basic-v2/256/{z}/{x}/{y}.png?key=4LWp1keVJZWckLljEDQy"
       />
-      {markers.map((marker, index) => (
-        <Marker key={index} position={marker.geocode} icon={customIcon}>
+      {activities.map((activity, index) => (
+        <Marker key={index} position={activity.geocode} icon={customIcon}>
           <Popup>
-            <a href="/activity" target="_blank">
-              <img src={marker.image} alt={marker.title} />
+            <Link to={`/activity/${activity.slug}`}>
+              <img src={activity.image} alt={activity.title} />
               <h2 className="text-black font-hind font-bold text-center text-sm md:text-base lg:text-lg">
-                {marker.title}
+                {activity.title}
               </h2>
-            </a>
+            </Link>
           </Popup>
         </Marker>
       ))}
