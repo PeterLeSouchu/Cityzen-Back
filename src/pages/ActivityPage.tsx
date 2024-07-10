@@ -1,34 +1,19 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-// import will from '../assets/will.webp';
-import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
-import { Activities } from '../@types';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
   addToFavorites,
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
-
-export const loadActivity = async ({
-  params,
-}: LoaderFunctionArgs): Promise<Activities> => {
-  console.log('PARAMS : ', params);
-
-  try {
-    const res = await axios.get<Activities>(
-      `http://localhost:3000/activity/${params.id}`
-    );
-
-    return res.data;
-  } catch (error: unknown) {
-    console.log(error);
-    throw new Error("Oops, les données n'ont pas pu être chargées");
-  }
-};
+import findActivity from '../store/selectors/activity';
 
 function ActivityPage() {
-  const activity = useLoaderData() as Activities;
+  const { slug } = useParams<{ slug: string }>();
+
+  const activity = useAppSelector((store) => {
+    return findActivity(store.activities.searchedActivities, slug as string);
+  });
 
   const dispatch = useAppDispatch();
 
