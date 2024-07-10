@@ -12,17 +12,13 @@ import {
 export const loadActivities = async (): Promise<LoaderActivities> => {
   try {
     const [recentsResponse, topRatedResponse] = await Promise.all([
-      axios.get<{ data: Activities[] }>(
-        'http://localhost:3000/activity/recent'
-      ),
-      axios.get<{ data: Activities[] }>(
-        'http://localhost:3000/activity/rating'
-      ),
+      axios.get<Activities[]>('http://localhost:3000/activity/recent'),
+      axios.get<Activities[]>('http://localhost:3000/activity/rating'),
     ]);
 
     return {
-      recents: recentsResponse.data.data,
-      topRated: topRatedResponse.data.data,
+      recents: recentsResponse.data,
+      topRated: topRatedResponse.data,
     };
   } catch (error: unknown) {
     console.error('Error loading data:', error);
