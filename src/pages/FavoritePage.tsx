@@ -20,9 +20,6 @@ function FavoritePage() {
       await dispatch(deleteFromFavorites({ id }));
     }
   }
-  useEffect(() => {
-    dispatch(getFavorites());
-  }, [dispatch]);
 
   const myFavoritesActivities = myFavorites.map((activity) => {
     return (
@@ -31,15 +28,11 @@ function FavoritePage() {
         className=" card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
       >
         <figure>
-          <img
-            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-            alt="Shoes"
-            className="object-cover"
-          />
+          <img src={activity.url_image} alt="Shoes" className="object-cover" />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
-            Restaurant, Annecy
+            {activity.title}
           </h2>
           <div className="flex justify-between mt-1">
             <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
@@ -48,7 +41,7 @@ function FavoritePage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                4,1
+                {activity.avg_rating}
               </span>
             </div>
             <button

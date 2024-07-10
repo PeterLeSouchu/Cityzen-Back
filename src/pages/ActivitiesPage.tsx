@@ -23,6 +23,7 @@ function ActivitiesPage() {
   const searched = useAppSelector(
     (store) => store.activities.searchedActivities
   );
+  console.log(searched);
 
   const searchedActivities = searched.map((activity) => (
     <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
