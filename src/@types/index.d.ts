@@ -2,13 +2,13 @@
 export interface Activities {
   id: number;
   slug: string;
-  title: string;
   url: string;
+  title: string;
   description: string;
-  avg_rate: number;
-  image: string;
+  url_image: string;
   address: string;
   phone: string;
+  avg_rating: number;
   latitude: number;
   longitude: number;
   city_id: number;

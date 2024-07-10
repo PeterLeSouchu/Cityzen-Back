@@ -12,18 +12,12 @@ import {
 export const loadActivities = async (): Promise<LoaderActivities> => {
   try {
     const [recentsResponse, topRatedResponse] = await Promise.all([
-      axios.get<{ data: Activities[] }>(
-        'http://localhost:3000/activity/recent'
-      ),
-      axios.get<{ data: Activities[] }>(
-        'http://localhost:3000/activity/rating'
-      ),
-      console.log(recentsResponse, topRatedResponse),
+      axios.get<Activities[]>('http://localhost:3000/activity/recent'),
+      axios.get<Activities[]>('http://localhost:3000/activity/rating'),
     ]);
-
     return {
-      recents: recentsResponse.data.data,
-      topRated: topRatedResponse.data.data,
+      recents: recentsResponse.data,
+      topRated: topRatedResponse.data,
     };
   } catch (error: unknown) {
     console.error('Error loading data:', error);
@@ -53,7 +47,7 @@ function HomePage() {
         key={activity.id}
       >
         <figure className="h-2/3">
-          <img src={activity.image} alt={activity.title} />
+          <img src={activity.url_image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -66,7 +60,7 @@ function HomePage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
             <button
@@ -98,7 +92,7 @@ function HomePage() {
         key={activity.id}
       >
         <figure className="h-2/3">
-          <img src={activity.image} alt={activity.title} />
+          <img src={activity.url_image} alt={activity.title} />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
@@ -111,7 +105,7 @@ function HomePage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
             <button
