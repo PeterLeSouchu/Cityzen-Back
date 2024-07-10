@@ -28,7 +28,7 @@ function ActivitiesPage() {
     <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
       <figure>
         <img
-          src={activity.image}
+          src={activity.url_image}
           alt={activity.title}
           className="object-cover"
         />
@@ -44,7 +44,7 @@ function ActivitiesPage() {
               className="text-yellow-300 md:h-4 lg:h-5"
             />
             <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-              {activity.avg_rate}
+              {activity.avg_rating}
             </span>
           </div>
           <button

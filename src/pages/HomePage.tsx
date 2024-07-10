@@ -15,9 +15,6 @@ export const loadActivities = async (): Promise<LoaderActivities> => {
       axios.get<Activities[]>('http://localhost:3000/activity/recent'),
       axios.get<Activities[]>('http://localhost:3000/activity/rating'),
     ]);
-
-    console.log(recentsResponse);
-
     return {
       recents: recentsResponse.data,
       topRated: topRatedResponse.data,

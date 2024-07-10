@@ -19,19 +19,7 @@ export const fetchActivitiesByCountryCity = createAsyncThunk(
     console.log(data);
 
     // compléter avec les données de notre API
-    return data.map((activity: Activities[]) => ({
-      id: activity.id,
-      title: activity.title,
-      url: activity.url,
-      description: activity.description,
-      avg_rate: activity.avg_rate,
-      image: activity.image,
-      address: activity.address,
-      phone: activity.phone,
-      latitude: activity.latitude,
-      longitude: activity.longitude,
-      city_id: activity.city_id,
-    })) as Activities[];
+    return data as Activities[];
   }
 );
 
