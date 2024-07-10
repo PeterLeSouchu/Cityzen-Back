@@ -18,6 +18,7 @@ export const loadActivities = async (): Promise<LoaderActivities> => {
       axios.get<{ data: Activities[] }>(
         'http://localhost:3000/activity/rating'
       ),
+      console.log(recentsResponse, topRatedResponse),
     ]);
 
     return {

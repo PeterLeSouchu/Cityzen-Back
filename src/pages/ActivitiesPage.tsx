@@ -25,7 +25,12 @@ function ActivitiesPage() {
   );
 
   const searchedActivities = searched.map((activity) => (
-    <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
+    <a
+      href="/activity"
+      target="_blank"
+      className="card w-60 h-60 lg:shadow-xl cursor-pointer"
+      key={activity.id}
+    >
       <figure>
         <img
           src={activity.image}
@@ -65,7 +70,7 @@ function ActivitiesPage() {
           </button>
         </div>
       </div>
-    </div>
+    </a>
   ));
   return (
     <div className="flex flex-col md:flex-row h-83">

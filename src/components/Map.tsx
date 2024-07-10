@@ -55,7 +55,7 @@ function Map() {
       {markers.map((marker, index) => (
         <Marker key={index} position={marker.geocode} icon={customIcon}>
           <Popup>
-            <a href={`/activity/${marker.title}`}>
+            <a href="/activity" target="_blank">
               <img src={marker.image} alt={marker.title} />
               <h2 className="text-black font-hind font-bold text-center text-sm md:text-base lg:text-lg">
                 {marker.title}
