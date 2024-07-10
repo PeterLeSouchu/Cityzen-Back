@@ -16,7 +16,6 @@ export const fetchActivitiesByCountryCity = createAsyncThunk(
       url: `http://localhost:3000/activity/${country}/${city}`,
     };
     const { data } = await axios.request(options);
-    console.log(data);
 
     // if (data.length === 0) {
 
