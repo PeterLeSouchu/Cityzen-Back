@@ -170,7 +170,7 @@ function Header() {
       outline-none"
               />
               {countrySuggestions.length > 0 && (
-                <div className="relative flex flex-col">
+                <div className="relative flex flex-col z-10">
                   {countrySuggestions.map((suggestion, index) => (
                     <button
                       type="button"
@@ -196,7 +196,7 @@ function Header() {
       outline-none"
               />
               {citySuggestions.length > 0 && (
-                <div className="relative flex flex-col">
+                <div className="relative flex flex-col z-10">
                   {citySuggestions.map((suggestion, index) => (
                     <button
                       type="button"
