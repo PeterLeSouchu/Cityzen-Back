@@ -1,20 +1,13 @@
-interface ModalEditActivityProps {
+interface ModalAddActivityProps {
   setModalType: React.Dispatch<
     React.SetStateAction<'edit' | 'delete' | 'add' | null>
   >;
-  setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
-  id: number;
 }
 
-function ModalEditActivity({
-  setModalType,
-  setActivityId,
-  id,
-}: ModalEditActivityProps) {
+function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
   function handlerRegister(
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void {
-    setActivityId(null);
     setModalType(null);
   }
 
@@ -23,9 +16,7 @@ function ModalEditActivity({
       <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
-            setActivityId(null);
             setModalType(null);
-            console.log(id);
           }}
           type="button"
           className="w-full text-right"
@@ -61,4 +52,4 @@ function ModalEditActivity({
     </div>
   );
 }
-export default ModalEditActivity;
+export default ModalAddActivity;
