@@ -23,8 +23,8 @@ function Header() {
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
   const [city, setCity] = useState<string>('');
   const [country, setCountry] = useState<string>('');
-  const [countrySuggestions, setCountrySuggestions] = useState('');
-  const [citySuggestions, setCitySuggestions] = useState('');
+  const [countrySuggestions, setCountrySuggestions] = useState([]);
+  const [citySuggestions, setCitySuggestions] = useState([]);
 
   const logged = useAppSelector((store) => store.profile.logged);
 
@@ -42,22 +42,13 @@ function Header() {
       }
 
       const response = await axios.get(
-        `http://localhost:3000/country/${country}`,
-        {
-          params: {
-            limit: 5,
-          },
-        }
+        `http://localhost:3000/country/${inputValue}`
       );
-
-      console.log(response);
 
       const suggestions = response.data.map((suggestedCountry) => ({
         id: suggestedCountry.id,
         name: suggestedCountry.name,
       }));
-
-      console.log(response.data);
 
       setCountrySuggestions(suggestions);
     } catch (error) {
@@ -82,20 +73,14 @@ function Header() {
         return;
       }
 
-      const response = await axios.get(`http://localhost:3000/city/${city}`, {
-        params: {
-          limit: 5,
-        },
-      });
-
-      console.log(response);
+      const response = await axios.get(
+        `http://localhost:3000/city/${inputValue}`
+      );
 
       const suggestions = response.data.map((suggestedCity) => ({
         id: suggestedCity.id,
         name: suggestedCity.name,
       }));
-
-      console.log(response.data);
 
       setCitySuggestions(suggestions);
     } catch (error) {
