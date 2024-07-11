@@ -111,6 +111,7 @@ function MyActivitiesPage() {
           id={activityId}
           setModalType={setModalType}
           setActivityId={setActivityId}
+          setMyActivities={setMyActivities}
         />
       )}
       {modalType === 'add' && <ModalAddActivity setModalType={setModalType} />}

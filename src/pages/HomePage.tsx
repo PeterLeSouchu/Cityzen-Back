@@ -31,8 +31,6 @@ function HomePage() {
   const dispatch = useAppDispatch();
 
   const myFavorites = useAppSelector((store) => store.profile.myFavorites);
-  console.log('voici les favoris recuperé depuis la bdd');
-  console.log(myFavorites);
 
   async function handlerFavorites(id: number): Promise<void> {
     if (myFavorites.some((favActivity) => favActivity.id === id)) {
