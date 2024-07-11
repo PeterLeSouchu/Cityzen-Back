@@ -1,5 +1,7 @@
 interface ModalDeleteActivityProps {
-  setModalType: React.Dispatch<React.SetStateAction<'edit' | 'delete' | null>>;
+  setModalType: React.Dispatch<
+    React.SetStateAction<'edit' | 'delete' | 'add' | null>
+  >;
   setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
   id: number;
 }

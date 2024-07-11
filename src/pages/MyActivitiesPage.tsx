@@ -5,13 +5,16 @@ import { useEffect, useState } from 'react';
 import { Activities } from '../@types';
 import ModalDeleteActivity from '../components/Modals/ModalDeleteActivity';
 import ModalEditActivity from '../components/Modals/ModalEditActivity';
+import ModalAddActivity from '../components/Modals/ModalAddActivity';
 
 function MyActivitiesPage() {
   // On créer un state local qui contient toutes nos activités
   const [myActivities, setMyActivities] = useState<Activities[]>([]);
 
   // On utilise deux state locaux, un pour le type, et l'autre pour l'id de l'activité
-  const [modalType, setModalType] = useState<'edit' | 'delete' | null>(null);
+  const [modalType, setModalType] = useState<'edit' | 'delete' | 'add' | null>(
+    null
+  );
   const [activityId, setActivityId] = useState<number | null>(null);
 
   // Al'initialisation de lap gae on récupère toutes nos activités créées
@@ -25,28 +28,30 @@ function MyActivitiesPage() {
           title: 'parc bleu',
           url: 'parc-bleu',
           description: 'il s’agit du parc bleu blabla',
-          avg_rate: 4.8,
-          image:
+          avg_rating: 4.8,
+          url_image:
             'https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/3/regular.png',
           address: 'rue du JS ',
           phone: '0785475126',
           longitude: 4.25154789,
           latitude: 45.14789315,
           city_id: 78,
+          slug: 'hello',
         },
         {
           id: 27,
           title: 'resto du coin bleu',
           url: 'resto-du-coin-bleu',
           description: 'il s’agit du resto du coin blablabla',
-          avg_rate: 2.8,
-          image:
+          avg_rating: 2.8,
+          url_image:
             'https://raw.githubusercontent.com/Yarkis01/PokeAPI/images/sprites/5/regular.png',
           address: 'rue du chocolat ',
           phone: '0784579685',
           longitude: 7.25154789,
           latitude: 52.14789315,
           city_id: 78,
+          slug: 'hello1',
         },
       ]);
     }
@@ -105,9 +110,20 @@ function MyActivitiesPage() {
     );
   });
 
+  function handlerAdd(): void {
+    setModalType('add');
+  }
+
   return (
     <div className="flex justify-center flex-wrap gap-2 p-5">
       {activities}
+      <button
+        onClick={handlerAdd}
+        type="button"
+        className="w-60 md:text-7xl text-5xl"
+      >
+        +
+      </button>
 
       {modalType === 'edit' && activityId !== null && (
         <ModalEditActivity
@@ -124,6 +140,7 @@ function MyActivitiesPage() {
           setActivityId={setActivityId}
         />
       )}
+      {modalType === 'add' && <ModalAddActivity setModalType={setModalType} />}
     </div>
   );
 }
