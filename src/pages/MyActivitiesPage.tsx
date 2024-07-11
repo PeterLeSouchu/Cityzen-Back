@@ -20,13 +20,17 @@ function MyActivitiesPage() {
   // Al'initialisation de lap gae on récupère toutes nos activités créées
   useEffect(() => {
     async function getMyActivities() {
-      const { data } = await axios.get(
-        'http://localhost:3000/profil/activity',
-        {
-          withCredentials: true,
-        }
-      );
-      setMyActivities(data.data);
+      try {
+        const { data } = await axios.get(
+          'http://localhost:3000/profil/activity',
+          {
+            withCredentials: true,
+          }
+        );
+        setMyActivities(data.data);
+      } catch (error) {
+        console.error('Erreur lors de la récupération des activités :', error);
+      }
     }
     getMyActivities();
   }, []);

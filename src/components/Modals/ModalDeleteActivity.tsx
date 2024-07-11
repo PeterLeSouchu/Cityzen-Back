@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Activities } from '../../@types';
 
 interface ModalDeleteActivityProps {
   setModalType: React.Dispatch<
@@ -16,12 +17,9 @@ function ModalDeleteActivity({
   id,
 }: ModalDeleteActivityProps) {
   async function handlerDelete(): Promise<void> {
-    const { data } = await axios.delete(
-      `http://localhost:3000/profil/activity/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.delete(`http://localhost:3000/profil/activity/${id}`, {
+      withCredentials: true,
+    });
     setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
     setActivityId(null);
     setModalType(null);
