@@ -26,22 +26,22 @@ function ActivitiesPage() {
   }
 
   const searchedActivities = searched.map((activity) => (
-    <Link
-      to={`/activity/${activity.slug}`}
-      className="card w-60 h-60 lg:shadow-xl cursor-pointer"
-      key={activity.id}
-    >
+    <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
       <figure>
-        <img
-          src={activity.url_image}
-          alt={activity.title}
-          className="object-cover"
-        />
+        <Link to={`/activity/${activity.slug}`}>
+          <img
+            src={activity.url_image}
+            alt={activity.title}
+            className="object-cover"
+          />
+        </Link>
       </figure>
       <div className="px-4 py-2">
-        <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
-          {activity.title}
-        </h2>
+        <Link to={`/activity/${activity.slug}`}>
+          <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+            {activity.title}
+          </h2>
+        </Link>
         <div className="flex justify-between mt-1">
           <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
             <FontAwesomeIcon
@@ -70,7 +70,7 @@ function ActivitiesPage() {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   ));
   return (
     <div className="flex flex-col md:flex-row h-83">
