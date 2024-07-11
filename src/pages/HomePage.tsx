@@ -43,14 +43,14 @@ function HomePage() {
   const recentsActivities = recents.map((activity) => {
     return (
       <div
-        className="card bg-base-100 min-w-44 max-w-56 w-1/4 h-60 mr-7"
         key={activity.id}
+        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
-        <figure className="h-2/3">
-          <img src={activity.url_image} alt={activity.title} />
+        <figure className="h-40">
+          <img src={activity.url_image} alt="Shoes" className="object-cover" />
         </figure>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
             {activity.title}
           </h2>
           <div className="flex justify-between mt-1">
@@ -88,14 +88,14 @@ function HomePage() {
   const ratingActivities = topRated.map((activity) => {
     return (
       <div
-        className="card bg-base-100 min-w-44 max-w-56 w-1/4 h-60 mr-7"
         key={activity.id}
+        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
-        <figure className="h-2/3">
-          <img src={activity.url_image} alt={activity.title} />
+        <figure className="h-40">
+          <img src={activity.url_image} alt="Shoes" className="object-cover" />
         </figure>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
             {activity.title}
           </h2>
           <div className="flex justify-between mt-1">
@@ -146,7 +146,7 @@ function HomePage() {
             <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-4xl">
               Les plus récentes
             </h3>
-            <div className="flex flex-row overflow-x-auto  ">
+            <div className=" gap-5 flex flex-row overflow-x-auto  ">
               {recentsActivities}
             </div>
           </div>
@@ -156,7 +156,7 @@ function HomePage() {
             <h3 className="font-montserrat font-semibold mb-6 text-2xl md:mb-8 md:text-4xl">
               Les mieux notés
             </h3>
-            <div className="flex flex-row overflow-x-auto  ">
+            <div className=" gap-5 flex flex-row overflow-x-auto  ">
               {ratingActivities}
             </div>
           </div>

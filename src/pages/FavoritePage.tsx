@@ -1,10 +1,8 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
 import {
   addToFavorites,
   deleteFromFavorites,
-  getFavorites,
 } from '../store/reducers/profileReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 
@@ -25,7 +23,7 @@ function FavoritePage() {
     return (
       <div
         key={activity.id}
-        className="card bg-green w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
         <figure className="h-40">
           <img src={activity.url_image} alt="Shoes" className="object-cover" />
@@ -66,7 +64,7 @@ function FavoritePage() {
     );
   });
   return (
-    <div className="flex flex-wrap gap-2 p-5 ">{myFavoritesActivities}</div>
+    <div className="flex flex-wrap gap-5 p-5 ">{myFavoritesActivities}</div>
   );
 }
 export default FavoritePage;
