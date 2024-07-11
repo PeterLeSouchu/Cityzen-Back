@@ -59,7 +59,7 @@ function ModalEditActivity({
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 h-2/5 fixed  bg-gray-300 rounded-md p-4">
+      <div className="z-50 w-2/5 min:h-2/5 fixed  bg-gray-300 rounded-md p-4">
         <button
           onClick={() => {
             setModalType(null);

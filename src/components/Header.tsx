@@ -160,6 +160,7 @@ function Header() {
 
   function handlerLogout(): void {
     dispatch(logout());
+    navigate('/');
   }
 
   return (
@@ -246,9 +247,9 @@ function Header() {
                       <Link to="/profile">Mon profil</Link>
                     </li>
                     <li>
-                      <Link onClick={handlerLogout} to="/">
+                      <button type="button" onClick={handlerLogout}>
                         Se déconnecter
-                      </Link>
+                      </button>
                     </li>
                   </>
                 ) : (

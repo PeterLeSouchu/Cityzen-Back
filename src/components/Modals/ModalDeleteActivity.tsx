@@ -17,13 +17,17 @@ function ModalDeleteActivity({
   id,
 }: ModalDeleteActivityProps) {
   async function handlerDelete(): Promise<void> {
-    await axios.delete(`http://localhost:3000/profil/activity/${id}`, {
-      withCredentials: true,
-    });
-    setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
-    setActivityId(null);
-    setModalType(null);
-    console.log(id);
+    try {
+      await axios.delete(`http://localhost:3000/profil/activity/${id}`, {
+        withCredentials: true,
+      });
+      setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
+      setActivityId(null);
+      setModalType(null);
+      console.log(id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (

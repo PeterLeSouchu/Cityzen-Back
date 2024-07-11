@@ -4,9 +4,7 @@ import ModalPseudo from '../components/Modals/ModalPseudo';
 
 function InfosPage() {
   const [modalPseudo, setModalPseudo] = useState(false);
-  function handlerPseudo(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  function handlerPseudo(): void {
     setModalPseudo((modal) => !modal);
   }
 

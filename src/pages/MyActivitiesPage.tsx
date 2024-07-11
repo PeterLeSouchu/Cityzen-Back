@@ -44,7 +44,7 @@ function MyActivitiesPage() {
     return (
       <div
         key={myActivity.id}
-        className="card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
         <figure>
           <img
@@ -54,7 +54,7 @@ function MyActivitiesPage() {
           />
         </figure>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
             {myActivity.title}
           </h2>
           <div className="flex justify-between mt-1">
@@ -69,12 +69,14 @@ function MyActivitiesPage() {
             </div>
             <div className="">
               <button
+                aria-label="Modifier l'activité"
                 onClick={() => openModal('edit', myActivity.id)}
                 type="button"
               >
                 <FontAwesomeIcon icon={faPen} className="md:h-6 lg:h-8 m-1" />
               </button>
               <button
+                aria-label="Supprimer l'activité"
                 onClick={() => openModal('delete', myActivity.id)}
                 type="button"
               >

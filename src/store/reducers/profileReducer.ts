@@ -51,7 +51,17 @@ export const getFavorites = createAsyncThunk(
 );
 
 export const login = createAction('PROFILE/LOGIN');
-export const logout = createAction('PROFILE/LOGOUT');
+
+export const logout = createAsyncThunk('PROFILE/LOGOUT', async () => {
+  await axios.post(
+    `http://localhost:3000/signout`,
+    {},
+    {
+      withCredentials: true,
+    }
+  );
+  return true;
+});
 
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
@@ -81,7 +91,7 @@ export const profileReducer = createReducer(initialState, (builder) => {
       state.logged = true;
       localStorage.setItem('logged', 'true');
     })
-    .addCase(logout, (state) => {
+    .addCase(logout.fulfilled, (state) => {
       state.logged = false;
       localStorage.setItem('logged', JSON.stringify(state.logged));
       state.myFavorites = [];

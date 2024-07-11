@@ -26,7 +26,11 @@ function FavoritePage() {
         className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
         <figure className="h-40">
-          <img src={activity.url_image} alt="Shoes" className="object-cover" />
+          <img
+            src={activity.url_image}
+            alt={activity.title}
+            className="object-cover"
+          />
         </figure>
         <div className="px-4 py-2">
           <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">

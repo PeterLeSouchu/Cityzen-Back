@@ -16,15 +16,15 @@ function AboutPage() {
               À propos de nous
             </h2>
             <p className="font-montserrat text-black mb-4">
-              Nous sommes une équipe de cinq développeurs diplômés de l'école
-              O'clock, spécialisée en développement web. Passionnés et
-              déterminés, nous avons créé CityZen pour simplifier la découverte
-              des activités locales.
+              Nous sommes une équipe de cinq développeurs diplômés de
+              l&apos;école O&apos;clock, spécialisée en développement web.
+              Passionnés et déterminés, nous avons créé CityZen pour simplifier
+              la découverte des activités locales.
             </p>
             <p className="font-montserrat text-black">
-              Ensemble, nous mettons nos compétences au service d'une plateforme
-              intuitive et enrichissante pour les résidents et les visiteurs de
-              chaque ville.
+              Ensemble, nous mettons nos compétences au service d&apos;une
+              plateforme intuitive et enrichissante pour les résidents et les
+              visiteurs de chaque ville.
             </p>
           </div>
           <div className="md:w-1/2 mb-6 md:mb-0 md:pr-4 justify-center items-center">
@@ -48,7 +48,7 @@ function AboutPage() {
           </div>
           <div className="md:w-2/5 md:pl-4 mt-12 mr-20">
             <h2 className="text-2xl font-montserrat mb-4  text-black">
-              Qu'est-ce que CityZen?
+              Qu&apos;est-ce que CityZen?
             </h2>
             <p className="mb-4 font-montserrat  text-black">
               CityZen est une plateforme web et mobile qui centralise toutes les
@@ -57,7 +57,7 @@ function AboutPage() {
             </p>
             <p className="font-montserrat  text-black">
               En entrant le nom de votre ville, vous découvrez une liste
-              d'activités avec des horaires, avis, photos et coordonnées,
+              d&apos;activités avec des horaires, avis, photos et coordonnées,
               visibles aussi sur une carte interactive.
             </p>
           </div>
