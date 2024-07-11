@@ -1,17 +1,28 @@
+import axios from 'axios';
+
 interface ModalDeleteActivityProps {
-  setModalType: React.Dispatch<React.SetStateAction<'edit' | 'delete' | null>>;
+  setModalType: React.Dispatch<
+    React.SetStateAction<'edit' | 'delete' | 'add' | null>
+  >;
   setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
+  setMyActivities: React.Dispatch<React.SetStateAction<Activities[]>>;
   id: number;
 }
 
 function ModalDeleteActivity({
   setModalType,
   setActivityId,
+  setMyActivities,
   id,
 }: ModalDeleteActivityProps) {
-  function handlerDelete(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
+  async function handlerDelete(): Promise<void> {
+    const { data } = await axios.delete(
+      `http://localhost:3000/profil/activity/${id}`,
+      {
+        withCredentials: true,
+      }
+    );
+    setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
     setActivityId(null);
     setModalType(null);
     console.log(id);

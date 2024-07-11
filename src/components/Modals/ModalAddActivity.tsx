@@ -1,30 +1,20 @@
 import { useState } from 'react';
 
-interface ModalEditActivityProps {
+interface ModalAddActivityProps {
   setModalType: React.Dispatch<
     React.SetStateAction<'edit' | 'delete' | 'add' | null>
   >;
-  setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
-  id: number;
 }
 
-function ModalEditActivity({
-  setModalType,
-  setActivityId,
-  id,
-}: ModalEditActivityProps) {
+function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  function handlerRegister(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    console.log(id);
+  function handlerRegister(): void {
     console.log(title, description, image);
-    setActivityId(null);
     setModalType(null);
   }
 
@@ -135,4 +125,4 @@ function ModalEditActivity({
     </div>
   );
 }
-export default ModalEditActivity;
+export default ModalAddActivity;
