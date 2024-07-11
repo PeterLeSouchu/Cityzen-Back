@@ -149,12 +149,12 @@ function Header() {
       outline-none"
               />
               {countrySuggestions.length > 0 && (
-                <div className="flex flex-col">
+                <div className="relative flex flex-col">
                   {countrySuggestions.map((suggestion, index) => (
                     <button
                       type="button"
                       key={index}
-                      className="btn const limitedResponse = response.data.slice(0, 5);"
+                      className="btn"
                       onClick={() => changeCountryInput(suggestion.name)}
                     >
                       {suggestion.name}
@@ -175,12 +175,12 @@ function Header() {
       outline-none"
               />
               {citySuggestions.length > 0 && (
-                <div className="flex flex-col">
+                <div className="relative flex flex-col">
                   {citySuggestions.map((suggestion, index) => (
                     <button
                       type="button"
                       key={index}
-                      className="btn const limitedResponse = response.data.slice(0, 5);"
+                      className="btn"
                       onClick={() => changeCityInput(suggestion.name)}
                     >
                       {suggestion.name}
