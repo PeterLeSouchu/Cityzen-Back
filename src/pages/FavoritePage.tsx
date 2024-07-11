@@ -25,13 +25,13 @@ function FavoritePage() {
     return (
       <div
         key={activity.id}
-        className=" card bg-base-100 w-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-green w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
-        <figure>
+        <figure className="h-40">
           <img src={activity.url_image} alt="Shoes" className="object-cover" />
         </figure>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
+          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
             {activity.title}
           </h2>
           <div className="flex justify-between mt-1">
