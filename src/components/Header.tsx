@@ -19,22 +19,37 @@ import ModalSignupOTP from './Modals/ModalSignupOTP';
 import { logout } from '../store/reducers/profileReducer';
 
 function Header() {
-  const notify = () =>
-    toast.success('Inscription réussi', {
-      position: 'top-left',
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light',
-      transition: Slide,
-    });
-
   const [modalSignup, setModalSignup] = useState(false);
   const [modalSignin, setModalSignin] = useState(false);
   const [modalSignupOTP, setModalSignupOTP] = useState(false);
+
+  const notify = () => {
+    if (modalSignin) {
+      toast.success('Connexion réussie', {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Slide,
+      });
+    } else {
+      toast.success('Inscription réussie', {
+        position: 'top-left',
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'light',
+        transition: Slide,
+      });
+    }
+  };
 
   const location = useLocation();
   // Pas besoin de déclarer ces 2 states dans le store étant donné qu'ils ne servent que dans ce composant, autant se simplifier la tâche et les mettre en local avec le hook useState.
@@ -261,7 +276,9 @@ function Header() {
           setModalSignupOTP={setModalSignupOTP}
         />
       ) : null}
-      {modalSignin ? <ModalSignin setModalSignin={setModalSignin} /> : null}
+      {modalSignin ? (
+        <ModalSignin notify={notify} setModalSignin={setModalSignin} />
+      ) : null}
       {modalSignupOTP ? (
         <ModalSignupOTP notify={notify} setModalSignupOTP={setModalSignupOTP} />
       ) : null}
