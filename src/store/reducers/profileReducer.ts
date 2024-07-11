@@ -83,6 +83,8 @@ export const profileReducer = createReducer(initialState, (builder) => {
     })
     .addCase(logout, (state) => {
       state.logged = false;
-      localStorage.setItem('logged', 'false');
+      localStorage.setItem('logged', JSON.stringify(state.logged));
+      state.myFavorites = [];
+      localStorage.setItem('myFavorites', JSON.stringify(state.myFavorites));
     });
 });
