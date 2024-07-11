@@ -31,8 +31,8 @@ function ModalSignupOTP({ setModalSignupOTP, notify }: ModalSignupOTPProps) {
       dispatch(login());
       dispatch(getFavorites());
       setCode('');
-      setModalSignupOTP(false);
       notify();
+      setModalSignupOTP(false);
     } catch (error) {
       console.error('There was an error!', error);
 

@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Id } from 'react-toastify';
 import { useAppDispatch } from '../../hooks/redux';
 import { getFavorites, login } from '../../store/reducers/profileReducer';
 
 interface ModalSigninProps {
   setModalSignin: React.Dispatch<React.SetStateAction<boolean>>;
+  notify: () => Id;
 }
 
-function ModalSignin({ setModalSignin }: ModalSigninProps) {
+function ModalSignin({ setModalSignin, notify }: ModalSigninProps) {
   const dispatch = useAppDispatch();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -41,6 +43,7 @@ function ModalSignin({ setModalSignin }: ModalSigninProps) {
       setPassword('');
       dispatch(login());
       dispatch(getFavorites());
+      notify();
       setModalSignin(false);
     } catch (error) {
       console.log(error);
