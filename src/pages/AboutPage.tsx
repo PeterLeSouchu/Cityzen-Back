@@ -1,3 +1,4 @@
+import { Octokit } from '@octokit/rest';
 import image from '../assets/cityview.jpg';
 import imagewill from '../assets/will.webp';
 import imageryad from '../assets/ryad.webp';
@@ -6,7 +7,38 @@ import imageziad from '../assets/ziad.webp';
 import imagepeter from '../assets/peter.webp';
 import imageabout from '../assets/about.jpeg';
 
-function AboutPage() {
+async function AboutPage() {
+  const pseudos = {
+    ryad: 'RyadC',
+    emmanuel: 'CHARLESEmmanuel-25',
+    peter: 'PeterLeSouchu',
+    wilson: 'SemedoWilson',
+    ziad: 'ziadelidrissi',
+  };
+
+  const octokit = new Octokit();
+
+  async function fetchUserData(username: string) {
+    try {
+      const response = await octokit.request('GET /users/{username}', {
+        username,
+        headers: {
+          'X-GitHub-Api-Version': '2022-11-28',
+        },
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(`Error fetching data for ${username}:`, error);
+    }
+  }
+
+  async function getUserData(pseudo: string) {
+    const response = await fetchUserData(pseudo);
+    return response;
+  }
+
+  getUserData(pseudos.ryad);
+
   return (
     <div className="py-10">
       <div className="container mx-auto px-4">
