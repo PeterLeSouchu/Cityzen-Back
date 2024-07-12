@@ -19,16 +19,14 @@ function ModalSignupOTP({ setModalSignupOTP, notify }: ModalSignupOTPProps) {
   ): Promise<void> {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         'http://localhost:3000/signup/confirmation',
         { OTP: code },
         { withCredentials: true }
       );
 
-      console.log(res.data);
-
       setErrorMessage('');
-      dispatch(login());
+      dispatch(login(data.data[0]));
       dispatch(getFavorites());
       setCode('');
       notify();
