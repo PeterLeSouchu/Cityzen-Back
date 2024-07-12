@@ -59,6 +59,7 @@ function Header() {
   const [citySuggestions, setCitySuggestions] = useState([]);
 
   const logged = useAppSelector((store) => store.profile.logged);
+  const pseudo = useAppSelector((store) => store.profile.credentials.pseudo);
 
   // Fonction pour controller l'input pays, en mettant ca valeur dans le state "country"
   async function handlerChangeCountry(
@@ -238,7 +239,11 @@ function Header() {
           <div>
             <div className="dropdown dropdown-bottom dropdown-end">
               <div tabIndex={0} role="button" className="btn">
-                <FontAwesomeIcon icon={faUser} />
+                {logged ? (
+                  <span> {pseudo.charAt(0).toLocaleUpperCase()}</span>
+                ) : (
+                  <FontAwesomeIcon icon={faUser} />
+                )}
               </div>
               <ul className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
                 {logged ? (
