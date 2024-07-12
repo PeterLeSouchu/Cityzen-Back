@@ -45,12 +45,13 @@ export const getFavorites = createAsyncThunk(
     const { data } = await axios.get(`http://localhost:3000/profil/favorite`, {
       withCredentials: true,
     });
-    console.log(data.data);
     return data.data as Activities[];
   }
 );
 
-export const login = createAction('PROFILE/LOGIN');
+export const login = createAction<{ pseudo: string; email: string }>(
+  'PROFILE/LOGIN'
+);
 
 export const logout = createAsyncThunk('PROFILE/LOGOUT', async () => {
   await axios.post(
@@ -87,7 +88,8 @@ export const profileReducer = createReducer(initialState, (builder) => {
       state.myFavorites = action.payload;
       localStorage.setItem('myFavorites', JSON.stringify(action.payload));
     })
-    .addCase(login, (state) => {
+    .addCase(login, (state, action) => {
+      console.log(action.payload);
       state.logged = true;
       localStorage.setItem('logged', 'true');
     })

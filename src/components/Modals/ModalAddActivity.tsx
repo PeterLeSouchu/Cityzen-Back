@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 interface ModalAddActivityProps {
@@ -13,8 +14,17 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  function handlerRegister(): void {
-    console.log(title, description, image);
+  async function handlerRegister(e): Promise<void> {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        'http://localhost:3000/profil/activity',
+        { title, description, image, phone, address, city },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.log(error);
+    }
     setModalType(null);
   }
 
@@ -59,7 +69,7 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
         >
           Close
         </button>
-        <form onSubmit={handlerRegister} className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
           <div className="flex flex-col">
             <label htmlFor="title">Titre</label>
             <input
