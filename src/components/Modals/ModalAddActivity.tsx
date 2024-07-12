@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 interface ModalAddActivityProps {
   setModalType: React.Dispatch<
@@ -13,10 +14,43 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  function handlerRegister(): void {
-    console.log(title, description, image);
+
+  async function handlerRegister(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    if (image) {
+      formData.append('image', image);
+    }
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('city', city);
+
+    try {
+      console.log('LLLL');
+      const { data } = await axios.post(
+        'http://localhost:3000/profil/activity',
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log('BYEEEE');
+      setModalType(null);
+    } catch (error) {
+      console.log(error);
+    }
     setModalType(null);
   }
+
+  useEffect(() => {
+    if (image) {
+      console.log('Image updated:', image);
+    }
+  }, [image]);
 
   function handlerDescription(
     event: React.ChangeEvent<HTMLInputElement>
@@ -59,7 +93,7 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
         >
           Close
         </button>
-        <form onSubmit={handlerRegister} className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
           <div className="flex flex-col">
             <label htmlFor="title">Titre</label>
             <input

@@ -28,7 +28,7 @@ function ModalSignin({ setModalSignin, notify }: ModalSigninProps) {
   ): Promise<void> {
     e.preventDefault();
     try {
-      const res = await axios.post(
+      const { data } = await axios.post(
         'http://localhost:3000/signin',
         {
           email,
@@ -38,10 +38,10 @@ function ModalSignin({ setModalSignin, notify }: ModalSigninProps) {
           withCredentials: true,
         }
       );
-      console.log(res.data);
+      console.log(data.data[0]);
       setEmail('');
       setPassword('');
-      dispatch(login());
+      dispatch(login(data.data[0]));
       dispatch(getFavorites());
       notify();
       setModalSignin(false);
