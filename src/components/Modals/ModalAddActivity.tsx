@@ -1,13 +1,18 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Activities } from '../../@types';
 
 interface ModalAddActivityProps {
   setModalType: React.Dispatch<
     React.SetStateAction<'edit' | 'delete' | 'add' | null>
   >;
+  setMyActivities: React.Dispatch<React.SetStateAction<Activities[]>>;
 }
 
-function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
+function ModalAddActivity({
+  setModalType,
+  setMyActivities,
+}: ModalAddActivityProps) {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [image, setImage] = useState<File | null>(null);
@@ -30,7 +35,6 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
     formData.append('city', city);
 
     try {
-      console.log('LLLL');
       const { data } = await axios.post(
         'http://localhost:3000/profil/activity',
         formData,
@@ -38,12 +42,12 @@ function ModalAddActivity({ setModalType }: ModalAddActivityProps) {
           withCredentials: true,
         }
       );
-      console.log('BYEEEE');
+      console.log(data);
+      setMyActivities((prevItems) => [...prevItems, data.data[0]]);
       setModalType(null);
     } catch (error) {
       console.log(error);
     }
-    setModalType(null);
   }
 
   useEffect(() => {
