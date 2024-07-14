@@ -120,7 +120,12 @@ function MyActivitiesPage() {
           setMyActivities={setMyActivities}
         />
       )}
-      {modalType === 'add' && <ModalAddActivity setModalType={setModalType} />}
+      {modalType === 'add' && (
+        <ModalAddActivity
+          setMyActivities={setMyActivities}
+          setModalType={setModalType}
+        />
+      )}
     </div>
   );
 }
