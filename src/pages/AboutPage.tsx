@@ -111,6 +111,7 @@ function AboutPage() {
             {membersData.map((member, index) => {
               return (
                 <a
+                  rel="noreferrer"
                   target="_blank"
                   href={member.html_url}
                   key={index}
