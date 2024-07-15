@@ -109,7 +109,7 @@ function AboutPage() {
 
       <div className="container mx-auto px-4 ">
         <div className="bg-lightgrey p-6 shadow-lg">
-          <h2 className="text-xl font-montserrat mb-10 mt-10 text-center  text-black">
+          <h2 className="text-4xl font-montserrat mb-10 mt-10 text-center  text-black">
             Notre équipe
           </h2>
           <div className="flex justify-around mb-20">
