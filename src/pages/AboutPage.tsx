@@ -1,11 +1,6 @@
 import { Octokit } from '@octokit/rest';
 import { useEffect, useState } from 'react';
 import image from '../assets/cityview.jpg';
-import imagewill from '../assets/will.webp';
-import imageryad from '../assets/ryad.webp';
-import imageemmanuel from '../assets/emmanuel.webp';
-import imageziad from '../assets/ziad.webp';
-import imagepeter from '../assets/peter.webp';
 import imageabout from '../assets/about.jpeg';
 
 function AboutPage() {
