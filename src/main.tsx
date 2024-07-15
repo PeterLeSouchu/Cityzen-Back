@@ -22,6 +22,7 @@ import InfosPage from './pages/InfosPage';
 import FavoritePage from './pages/FavoritePage';
 import NotFound from './pages/NotFound';
 import MyActivitiesPage from './pages/MyActivitiesPage';
+import LegalNotices from './pages/LegalNotices';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -47,6 +48,7 @@ const router = createBrowserRouter(
           <Route path="/profile/my-activities" element={<MyActivitiesPage />} />
         </Route>
       </Route>
+      <Route path="/legal-notices" element={<LegalNotices />} />
     </Route>
   )
 );
