@@ -43,6 +43,9 @@ export default {
         80: '80vh',
         83: '83vh',
       },
+      spacing: {
+        'vw-12': '12vw',
+      },
     },
   },
   plugins: [daisyui],
