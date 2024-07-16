@@ -115,7 +115,6 @@ function MyActivitiesPage() {
           setMyActivities={setMyActivities}
           setModalType={setModalType}
           setActivityId={setActivityId}
-          setMyActivities={setMyActivities}
         />
       )}
 
