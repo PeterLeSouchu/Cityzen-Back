@@ -21,7 +21,12 @@ function ModalDeleteActivity({
   const dispatch = useAppDispatch();
   async function handlerDelete(): Promise<void> {
     try {
+      const res = await axios.get('http://localhost:3000/csrf-token');
+      const { csrfToken } = res.data;
       await axios.delete(`http://localhost:3000/profil/activity/${id}`, {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
         withCredentials: true,
       });
       setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
