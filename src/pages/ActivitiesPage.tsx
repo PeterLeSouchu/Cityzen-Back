@@ -28,7 +28,7 @@ function ActivitiesPage() {
   const searchedActivities = searched.map((activity) => (
     <div className="card w-60 h-60 lg:shadow-xl" key={activity.id}>
       <figure>
-        <Link to={`/activity/${activity.slug}`}>
+        <Link to={`/activity/${activity.id}`}>
           <img
             src={activity.url_image}
             alt={activity.title}
@@ -37,7 +37,7 @@ function ActivitiesPage() {
         </Link>
       </figure>
       <div className="px-4 py-2">
-        <Link to={`/activity/${activity.slug}`}>
+        <Link to={`/activity/${activity.id}`}>
           <h2 className="font-semibold font-hind text-sm md:text-base lg:text-lg">
             {activity.title}
           </h2>
