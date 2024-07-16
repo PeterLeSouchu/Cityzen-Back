@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { Activities } from '../../@types';
+import { useAppDispatch } from '../../hooks/redux';
+import { updateFavorites } from '../../store/reducers/profileReducer';
 
 interface ModalDeleteActivityProps {
   setModalType: React.Dispatch<
@@ -16,12 +18,14 @@ function ModalDeleteActivity({
   setMyActivities,
   id,
 }: ModalDeleteActivityProps) {
+  const dispatch = useAppDispatch();
   async function handlerDelete(): Promise<void> {
     try {
       await axios.delete(`http://localhost:3000/profil/activity/${id}`, {
         withCredentials: true,
       });
       setMyActivities((prev) => prev.filter((activity) => activity.id !== id));
+      dispatch(updateFavorites(id));
       setActivityId(null);
       setModalType(null);
       console.log(id);
