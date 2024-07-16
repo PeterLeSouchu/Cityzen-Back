@@ -2,6 +2,7 @@ import { faTrash, faStar, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Activities } from '../@types';
 import ModalDeleteActivity from '../components/Modals/ModalDeleteActivity';
 import ModalEditActivity from '../components/Modals/ModalEditActivity';
@@ -47,16 +48,20 @@ function MyActivitiesPage() {
         className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
         <figure>
-          <img
-            src={myActivity.url_image}
-            alt="Shoes"
-            className="object-cover"
-          />
+          <Link to={`http://localhost:5173/activity/${myActivity.id}`}>
+            <img
+              src={myActivity.url_image}
+              alt="Shoes"
+              className="object-cover"
+            />
+          </Link>
         </figure>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
-            {myActivity.title}
-          </h2>
+          <Link to={`http://localhost:5173/activity/${myActivity.id}`}>
+            <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
+              {myActivity.title}
+            </h2>
+          </Link>
           <div className="flex justify-between mt-1">
             <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
               <FontAwesomeIcon
@@ -110,6 +115,7 @@ function MyActivitiesPage() {
           setMyActivities={setMyActivities}
           setModalType={setModalType}
           setActivityId={setActivityId}
+          setMyActivities={setMyActivities}
         />
       )}
 

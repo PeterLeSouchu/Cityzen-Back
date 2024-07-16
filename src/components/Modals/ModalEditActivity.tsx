@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { Activities } from '../../@types';
+import axios from 'axios';
 
 interface ModalEditActivityProps {
   setModalType: React.Dispatch<
@@ -8,6 +10,7 @@ interface ModalEditActivityProps {
   setMyActivities: React.Dispatch<React.SetStateAction<Activities[]>>;
   setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
   id: number;
+  setMyActivities: React.Dispatch<React.SetStateAction<Activities[]>>;
 }
 
 function ModalEditActivity({
@@ -15,6 +18,7 @@ function ModalEditActivity({
   setMyActivities,
   setActivityId,
   id,
+  setMyActivities,
 }: ModalEditActivityProps) {
   const [title, setTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
@@ -23,9 +27,11 @@ function ModalEditActivity({
   const [address, setAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
   async function handlerRegister(
+
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
+
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -35,22 +41,28 @@ function ModalEditActivity({
     formData.append('phone', phone);
     formData.append('address', address);
     formData.append('city', city);
+
     try {
       const res = await axios.get('http://localhost:3000/csrf-token');
       const { csrfToken } = res.data;
+
       const { data } = await axios.patch(
         `http://localhost:3000/profil/activity/${id}`,
         formData,
         {
+
           headers: {
             'X-CSRF-Token': csrfToken,
           },
+
           withCredentials: true,
         }
       );
       setMyActivities((prev) =>
         prev.map((activity) =>
-          activity.id === id ? data.data.editedActivity : activity
+
+          activity.id === data.data[0].id ? data.data[0] : activity
+
         )
       );
       setActivityId(null);
