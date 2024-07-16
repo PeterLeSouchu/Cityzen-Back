@@ -5,6 +5,7 @@ import {
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { Link } from 'react-router-dom';
 
 function FavoritePage() {
   const dispatch = useAppDispatch();
@@ -25,17 +26,21 @@ function FavoritePage() {
         key={activity.id}
         className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
       >
-        <figure className="h-40">
-          <img
-            src={activity.url_image}
-            alt={activity.title}
-            className="object-cover"
-          />
-        </figure>
+        <Link to={`http://localhost:5173/activity/${activity.id}`}>
+          <figure className="h-40">
+            <img
+              src={activity.url_image}
+              alt={activity.title}
+              className="object-cover"
+            />
+          </figure>
+        </Link>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
-            {activity.title}
-          </h2>
+          <Link to={`http://localhost:5173/activity/${activity.id}`}>
+            <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
+              {activity.title}
+            </h2>
+          </Link>
           <div className="flex justify-between mt-1">
             <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
               <FontAwesomeIcon
