@@ -64,6 +64,8 @@ export const logout = createAsyncThunk('PROFILE/LOGOUT', async () => {
   return true;
 });
 
+export const updateFavorites = createAction<number>('PROFILE/UPDATE_FAVORITES');
+
 // On initialise notre state de départ
 const initialState: ActivitiesState = {
   logged: JSON.parse(localStorage.getItem('logged') || 'false'),
@@ -104,6 +106,12 @@ export const profileReducer = createReducer(initialState, (builder) => {
       state.logged = false;
       localStorage.setItem('logged', JSON.stringify(state.logged));
       state.myFavorites = [];
+      localStorage.setItem('myFavorites', JSON.stringify(state.myFavorites));
+    })
+    .addCase(updateFavorites, (state, action) => {
+      state.myFavorites = state.myFavorites.filter(
+        (favorite) => favorite.id !== action.payload
+      );
       localStorage.setItem('myFavorites', JSON.stringify(state.myFavorites));
     });
 });
