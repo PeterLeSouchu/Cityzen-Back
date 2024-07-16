@@ -1,20 +1,32 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useParams } from 'react-router-dom';
+import { LoaderFunctionArgs, useLoaderData } from 'react-router-dom';
+import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import {
   addToFavorites,
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
-import findActivity from '../store/selectors/activity';
+import { Activities } from '../@types';
+
+export const loadActivity = async ({ params }: LoaderFunctionArgs) => {
+  try {
+    console.log('hello');
+    const { data } = await axios.get(
+      `http://localhost:3000/activity/${params.id}`
+    );
+    console.log(data);
+
+    return data.data[0];
+  } catch (error: unknown) {
+    console.error('Error loading data:', error);
+    throw new Error("Oops, les données n'ont pas pu être chargées");
+  }
+};
 
 function ActivityPage() {
-  const { slug } = useParams<{ slug: string }>();
-
-  const activity = useAppSelector((store) => {
-    return findActivity(store.activities.searchedActivities, slug as string);
-  });
-
+  const activity = useLoaderData() as Activities;
+  console.log(activity);
   const dispatch = useAppDispatch();
 
   const myFavorites = useAppSelector((store) => store.profile.myFavorites);
@@ -68,7 +80,7 @@ function ActivityPage() {
               className="text-yellow-300 md:h-4 lg:h-5"
             />
             <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-              {activity.avg_rate}
+              {activity.avg_rating}
             </span>
           </div>
         </div>

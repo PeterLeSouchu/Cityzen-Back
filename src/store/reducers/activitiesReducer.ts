@@ -21,7 +21,7 @@ export const fetchActivitiesByCountryCity = createAsyncThunk(
 
     // }
     // compléter avec les données de notre API
-    return data as Activities[];
+    return data.data as Activities[];
   }
 );
 

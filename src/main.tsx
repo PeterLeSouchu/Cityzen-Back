@@ -14,7 +14,7 @@ import Root from './pages/Roots';
 import './styles/index.css';
 
 import AboutPage from './pages/AboutPage';
-import ActivityPage from './pages/ActivityPage';
+import ActivityPage, { loadActivity } from './pages/ActivityPage';
 import HomePage, { loadActivities } from './pages/HomePage';
 import ActivitiesPage from './pages/ActivitiesPage';
 import ProfilePage from './pages/ProfilePage';
@@ -39,7 +39,11 @@ const router = createBrowserRouter(
     <Route path="/" element={<Root />} errorElement={<NotFound />}>
       <Route index element={<HomePage />} loader={loadActivities} />
       <Route path="/about" element={<AboutPage />} />
-      <Route path="/activity/:slug" element={<ActivityPage />} />
+      <Route
+        path="/activity/:id"
+        element={<ActivityPage />}
+        loader={loadActivity}
+      />
       <Route path="/activities" element={<ActivitiesPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="/profile" element={<ProfilePage />}>
