@@ -17,7 +17,7 @@ export const loadActivity = async ({ params }: LoaderFunctionArgs) => {
     );
     console.log(data);
 
-    return data;
+    return data.data[0];
   } catch (error: unknown) {
     console.error('Error loading data:', error);
     throw new Error("Oops, les données n'ont pas pu être chargées");

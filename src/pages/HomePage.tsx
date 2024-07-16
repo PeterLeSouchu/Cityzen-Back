@@ -17,8 +17,8 @@ export const loadActivities = async (): Promise<LoaderActivities> => {
       axios.get<Activities[]>('http://localhost:3000/activity/rating'),
     ]);
     return {
-      recents: recentsResponse.data,
-      topRated: topRatedResponse.data,
+      recents: recentsResponse.data.data,
+      topRated: topRatedResponse.data.data,
     };
   } catch (error: unknown) {
     console.error('Error loading data:', error);

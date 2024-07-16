@@ -2,11 +2,11 @@ import { faTrash, faStar, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Activities } from '../@types';
 import ModalDeleteActivity from '../components/Modals/ModalDeleteActivity';
 import ModalEditActivity from '../components/Modals/ModalEditActivity';
 import ModalAddActivity from '../components/Modals/ModalAddActivity';
-import { Link } from 'react-router-dom';
 
 function MyActivitiesPage() {
   // On créer un state local qui contient toutes nos activités
