@@ -33,12 +33,18 @@ function ModalAddActivity({
     formData.append('phone', phone);
     formData.append('address', address);
     formData.append('city', city);
+    console.log(formData);
 
     try {
+      const res = await axios.get('http://localhost:3000/csrf-token');
+      const csrfToken = res.data.csrf;
       const { data } = await axios.post(
         'http://localhost:3000/profil/activity',
         formData,
         {
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
           withCredentials: true,
         }
       );

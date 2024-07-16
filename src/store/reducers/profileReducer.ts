@@ -16,10 +16,15 @@ interface ActivitiesState {
 export const addToFavorites = createAsyncThunk(
   'PROFILE/ADD-TO-FAVORITES',
   async ({ id }: { id: number }) => {
+    const res = await axios.get('http://localhost:3000/csrf-token');
+    const csrfToken = res.data.csrf;
     const { data } = await axios.post(
       'http://localhost:3000/profil/favorite',
       { id },
       {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
         withCredentials: true,
       }
     );
@@ -29,9 +34,14 @@ export const addToFavorites = createAsyncThunk(
 export const deleteFromFavorites = createAsyncThunk(
   'PROFILE/ADELETE-FROM-FAVORITES',
   async ({ id }: { id: number }) => {
+    const res = await axios.get('http://localhost:3000/csrf-token');
+    const csrfToken = res.data.csrf;
     const { data } = await axios.delete(
       `http://localhost:3000/profil/favorite/${id}`,
       {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
         withCredentials: true,
       }
     );

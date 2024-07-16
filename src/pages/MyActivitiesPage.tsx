@@ -107,6 +107,7 @@ function MyActivitiesPage() {
       {modalType === 'edit' && activityId !== null && (
         <ModalEditActivity
           id={activityId}
+          setMyActivities={setMyActivities}
           setModalType={setModalType}
           setActivityId={setActivityId}
         />

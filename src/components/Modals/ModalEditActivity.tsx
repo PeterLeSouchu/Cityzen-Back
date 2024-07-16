@@ -1,15 +1,18 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 interface ModalEditActivityProps {
   setModalType: React.Dispatch<
     React.SetStateAction<'edit' | 'delete' | 'add' | null>
   >;
+  setMyActivities: React.Dispatch<React.SetStateAction<Activities[]>>;
   setActivityId: React.Dispatch<React.SetStateAction<number | null>>;
   id: number;
 }
 
 function ModalEditActivity({
   setModalType,
+  setMyActivities,
   setActivityId,
   id,
 }: ModalEditActivityProps) {
@@ -19,13 +22,42 @@ function ModalEditActivity({
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  function handlerRegister(
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    console.log(id);
-    console.log(title, description, image);
-    setActivityId(null);
-    setModalType(null);
+  async function handlerRegister(
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('description', description);
+    if (image) {
+      formData.append('image', image);
+    }
+    formData.append('phone', phone);
+    formData.append('address', address);
+    formData.append('city', city);
+    try {
+      const res = await axios.get('http://localhost:3000/csrf-token');
+      const csrfToken = res.data.csrf;
+      const { data } = await axios.patch(
+        `http://localhost:3000/profil/activity/${id}`,
+        formData,
+        {
+          headers: {
+            'X-CSRF-Token': csrfToken,
+          },
+          withCredentials: true,
+        }
+      );
+      setMyActivities((prev) =>
+        prev.map((activity) =>
+          activity.id === id ? data.data.editedActivity : activity
+        )
+      );
+      setActivityId(null);
+      setModalType(null);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handlerDescription(
@@ -69,7 +101,7 @@ function ModalEditActivity({
         >
           Close
         </button>
-        <form onSubmit={handlerRegister} className="flex flex-col">
+        <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
           <div className="flex flex-col">
             <label htmlFor="title">Titre</label>
             <input
