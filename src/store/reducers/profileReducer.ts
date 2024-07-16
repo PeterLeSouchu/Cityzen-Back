@@ -17,7 +17,7 @@ export const addToFavorites = createAsyncThunk(
   'PROFILE/ADD-TO-FAVORITES',
   async ({ id }: { id: number }) => {
     const res = await axios.get('http://localhost:3000/csrf-token');
-    const csrfToken = res.data.csrf;
+    const { csrfToken } = res.data;
     const { data } = await axios.post(
       'http://localhost:3000/profil/favorite',
       { id },
@@ -35,7 +35,7 @@ export const deleteFromFavorites = createAsyncThunk(
   'PROFILE/ADELETE-FROM-FAVORITES',
   async ({ id }: { id: number }) => {
     const res = await axios.get('http://localhost:3000/csrf-token');
-    const csrfToken = res.data.csrf;
+    const { csrfToken } = res.data;
     const { data } = await axios.delete(
       `http://localhost:3000/profil/favorite/${id}`,
       {

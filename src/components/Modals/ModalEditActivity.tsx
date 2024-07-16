@@ -37,7 +37,7 @@ function ModalEditActivity({
     formData.append('city', city);
     try {
       const res = await axios.get('http://localhost:3000/csrf-token');
-      const csrfToken = res.data.csrf;
+      const { csrfToken } = res.data;
       const { data } = await axios.patch(
         `http://localhost:3000/profil/activity/${id}`,
         formData,
