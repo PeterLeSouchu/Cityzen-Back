@@ -159,27 +159,19 @@ function HomePage() {
 
   return (
     <>
-      {/* <div className="hero bg-white h-screen">
-        <div className="hero-content lg:h-2/5 flex-col gap-16 lg:gap-vw-12 lg:flex-row">
-          <div className="z-50 h-full flex flex-col text-center gap-8 md:gap-12 lg:gap-16 font-montserrat">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl">
-              Vivez votre ville <br />
-              <span className="text-green italic">autrement</span>
-            </h2>
-          </div>
-          <img src={image} alt="bg-homePage" className="w-8/12" />
-        </div>
-      </div> */}
-      <div className="hero bg-white w-screen h-screen   ">
-        <div className=" h-full flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat">
+      <div className="hero bg-green2 w-screen h-screen    ">
+        <div className=" h-full flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat z-10">
           <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
           <h2 className="text-4xl md:text-5xl lg:text-6xl">
             Vivez votre ville <br />
             <span className="text-green italic">autrement</span>
           </h2>
         </div>
-        {/* <img src={image} alt="bg-home" className="w-2/3" /> */}
+        {/* <img
+          src={image}
+          alt="bg-home"
+          className="w-2/3 absolute top-50 right-0"
+        /> */}
       </div>
 
       <div className="bg-lightgrey flex flex-col justify-between">
