@@ -26,21 +26,17 @@ function FavoritePage() {
         key={activity.id}
         className="card bg-white w-40 h-40 md:w-60 md:h-60 lg:w-60 lg:w-60 flex-shrink-0 lg:shadow-xl"
       >
-        <Link to={`http://localhost:5173/activity/${activity.id}`}>
-          <figure className="h-40">
-            <img
-              src={activity.url_image}
-              alt={activity.title}
-              className="object-cover"
-            />
-          </figure>
-        </Link>
+        <figure className="h-40">
+          <img
+            src={activity.url_image}
+            alt={activity.title}
+            className="object-cover"
+          />
+        </figure>
         <div className="px-4 py-2">
-          <Link to={`http://localhost:5173/activity/${activity.id}`}>
-            <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
-              {activity.title}
-            </h2>
-          </Link>
+          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
+            {activity.title}
+          </h2>
           <div className="flex justify-between mt-1">
             <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
               <FontAwesomeIcon
