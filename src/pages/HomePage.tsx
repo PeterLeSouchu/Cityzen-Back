@@ -167,12 +167,12 @@ function HomePage() {
               <span className="text-green italic">autrement</span>
             </h2>
           </div>
-          <img
+          {/* <img
             src={logo}
             alt="logo-site"
             className="max-w-sm md:max-w-md lg:max-w-lg rounded-lg shadow-2xl p-8 hover:scale-105 md:hover:scale-110 lg:hover:scale-125 duration-300 cursor-pointer"
             onClick={scrollDown}
-          />
+          /> */}
         </div>
       </div>
 
