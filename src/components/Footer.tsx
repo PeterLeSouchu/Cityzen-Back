@@ -8,7 +8,9 @@ function Footer() {
           Copyright © {new Date().getFullYear()} - CityZen - Tous droits
           réservés
         </p>
-        <Link to="/legal-notices">Mention légales</Link>
+        <Link to="/legal-notices" className="underline">
+          Mention légales
+        </Link>
       </aside>
     </footer>
   );
