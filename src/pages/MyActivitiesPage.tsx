@@ -45,7 +45,7 @@ function MyActivitiesPage() {
     return (
       <div
         key={myActivity.id}
-        className=" overflow-hidden card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className=" overflow-hidden card bg-white  w-60 h-60 flex-shrink-0 shadow-xl"
       >
         <figure>
           <Link to={`http://localhost:5173/activity/${myActivity.id}`}>

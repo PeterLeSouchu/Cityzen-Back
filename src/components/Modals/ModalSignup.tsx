@@ -190,7 +190,7 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
           </div>
           <button
             type="submit"
-            className="btn md:text-base text-sm btn-success text-base text-white mt-4 w-1/4 mx-auto"
+            className="btn md:text-base text-sm btn-success text-white mt-4 w-1/4 mx-auto"
           >
             Confirmer
           </button>

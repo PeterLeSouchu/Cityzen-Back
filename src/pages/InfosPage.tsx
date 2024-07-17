@@ -20,7 +20,7 @@ function InfosPage() {
         <div className="flex items-center space-x-2 font-montserrat mt-2">
           <input
             type="text"
-            className="w-2/3 h-6 border rounded px-4 py-2  bg-whiteP"
+            className="w-auto min-w-36 h-6 border rounded px-4 py-2  bg-whiteP"
             id="pseudo"
             disabled
             placeholder={credentials.pseudo}
@@ -43,7 +43,7 @@ function InfosPage() {
         <label htmlFor="email">E-mail</label>
         <input
           type="text"
-          className="w-2/3 h-6 border rounded px-4 py-2 mt-2 bg-whiteP"
+          className="w-3/6 min-w-56 min h-6 border rounded px-4 py-2 mt-2 bg-whiteP"
           id="email"
           disabled
           placeholder={credentials.email}
