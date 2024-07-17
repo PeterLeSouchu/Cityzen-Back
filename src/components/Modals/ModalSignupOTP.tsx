@@ -6,7 +6,7 @@ import { getFavorites, login } from '../../store/reducers/profileReducer';
 
 interface ModalSignupOTPProps {
   setModalSignupOTP: React.Dispatch<React.SetStateAction<boolean>>;
-  notify: () => Id;
+  notify: () => void;
 }
 
 function ModalSignupOTP({ setModalSignupOTP, notify }: ModalSignupOTPProps) {
