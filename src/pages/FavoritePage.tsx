@@ -24,7 +24,7 @@ function FavoritePage() {
     return (
       <div
         key={activity.id}
-        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-green w-40 h-40 md:w-60 md:h-60 lg:w-60 lg:w-60 flex-shrink-0 lg:shadow-xl"
       >
         <Link to={`http://localhost:5173/activity/${activity.id}`}>
           <figure className="h-40">
