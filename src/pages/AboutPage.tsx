@@ -107,7 +107,7 @@ function AboutPage() {
           <h2 className="text-4xl font-montserrat mb-10 mt-10 text-center  text-black">
             Notre équipe
           </h2>
-          <div className="flex justify-around mb-20">
+          <div className="flex justify-around flex-col md:flex-row mb-20">
             {membersData.map((member, index) => {
               return (
                 <a

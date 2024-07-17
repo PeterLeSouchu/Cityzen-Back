@@ -128,7 +128,7 @@ function ModalEditActivity({
           </button>
         </div>
         <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label className="label" htmlFor="title">
               Titre
             </label>
@@ -141,7 +141,7 @@ function ModalEditActivity({
               className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label htmlFor="file">Photo (1 seule)</label>
             <input
               onChange={(e) => handlerImage(e)}
@@ -150,7 +150,7 @@ function ModalEditActivity({
               id="file"
             />
           </div>
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label htmlFor="description">Description</label>
             <input
               onChange={(e) => handlerDescription(e)}
@@ -161,7 +161,7 @@ function ModalEditActivity({
               className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label htmlFor="phone">Numéro de téléphone</label>
             <input
               onChange={(e) => handlerPhone(e)}
@@ -172,7 +172,7 @@ function ModalEditActivity({
               className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label htmlFor="adress">Adresse postale</label>
             <input
               onChange={(e) => handlerAddress(e)}
@@ -184,7 +184,7 @@ function ModalEditActivity({
               s
             />
           </div>
-          <div className="flex flex-col my-3">
+          <div className="flex flex-col my-1">
             <label htmlFor="city">Ville</label>
             <input
               onChange={(e) => handlerCity(e)}

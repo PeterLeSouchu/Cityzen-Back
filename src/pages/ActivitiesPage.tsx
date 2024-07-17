@@ -26,7 +26,7 @@ function ActivitiesPage() {
   }
 
   const searchedActivities = searched.map((activity) => (
-    <div className="bg-white card w-60 h-60 lg:shadow-xl" key={activity.id}>
+    <div className="bg-white card w-60 h-60 shadow-xl" key={activity.id}>
       <figure>
         <Link to={`/activity/${activity.id}`}>
           <img
@@ -74,7 +74,7 @@ function ActivitiesPage() {
   ));
   return (
     <div className="flex flex-col md:flex-row h-83">
-      <div className=" bg-lightgrey md:w-7/12  w-full py-8 h-50 md:h-83 flex justify-center overflow-scroll">
+      <div className=" bg-white md:w-7/12  w-full py-8 h-50 md:h-83 flex justify-center overflow-scroll">
         <div className="w-11/12 flex flex-wrap gap-5 overflow-scroll justify-center">
           {searchedActivities}
         </div>

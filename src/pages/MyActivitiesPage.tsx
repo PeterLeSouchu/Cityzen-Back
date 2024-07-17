@@ -99,7 +99,7 @@ function MyActivitiesPage() {
   }
 
   return (
-    <div className="flex flex-wrap gap-2 p-5">
+    <div className="flex flex-wrap gap-2 justify-center md:justify-normal p-5">
       {activities}
       <button
         onClick={handlerAdd}

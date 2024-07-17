@@ -27,7 +27,7 @@ function NavBottom() {
   return (
     <>
       {' '}
-      <nav className="flex justify-around items-center bg-lightgrey md:hidden fixed bottom-0 left-0 right-0 h-7 z-50">
+      <nav className="flex justify-around items-center bg-lightgrey md:hidden fixed bottom-0 left-0 right-0 h-7 z-40">
         <div>
           <div className="dropdown dropdown-top">
             <div tabIndex={0} role="button" className="btn">
