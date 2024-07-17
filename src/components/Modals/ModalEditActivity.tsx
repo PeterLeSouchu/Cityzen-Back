@@ -28,14 +28,24 @@ function ModalEditActivity({
   ): Promise<void> {
     event.preventDefault();
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
+    if (title) {
+      formData.append('title', title);
+    }
+    if (description) {
+      formData.append('description', description);
+    }
     if (image) {
       formData.append('image', image);
     }
-    formData.append('phone', phone);
-    formData.append('address', address);
-    formData.append('city', city);
+    if (phone) {
+      formData.append('phone', phone);
+    }
+    if (address) {
+      formData.append('address', address);
+    }
+    if (city) {
+      formData.append('city', city);
+    }
 
     try {
       const { data } = await axios.patch(
