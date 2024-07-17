@@ -11,7 +11,7 @@ function ModalPseudo({ setModalPseudo }: ModalPseudoProps) {
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 min-h-2/5 fixed  bg-lightgrey rounded-md p-4">
+      <div className="z-50 w-2/5 min-w-80 min-h-2/5 fixed  bg-lightgrey rounded-md p-4">
         <div className="flex justify-between items-center mb-4">
           <span className="font-montserrat text-3xl font-semibold italic">
             Modification du pseudo
@@ -59,7 +59,7 @@ function ModalPseudo({ setModalPseudo }: ModalPseudoProps) {
           </div>
           <button
             type="submit"
-            className="btn btn-success text-base text-white mt-4 w-1/4 mx-auto"
+            className="btn btn-success md:text-base text-sm text-white mt-4 w-1/4 mx-auto"
             onClick={handlerRegister}
           >
             Confirmer
