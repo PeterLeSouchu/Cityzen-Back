@@ -1,11 +1,11 @@
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 import {
   addToFavorites,
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { Link } from 'react-router-dom';
 
 function FavoritePage() {
   const dispatch = useAppDispatch();
