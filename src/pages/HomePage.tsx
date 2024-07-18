@@ -4,7 +4,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { Activities, LoaderActivities } from '../@types';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import image from '../assets/fondCity (1).png';
+import image from '../assets/homeimage.webp';
 import {
   addToFavorites,
   deleteFromFavorites,
@@ -167,11 +167,7 @@ function HomePage() {
             <span className="text-green italic">autrement</span>
           </h2>
         </div>
-        {/* <img
-          src={image}
-          alt="bg-home"
-          className="w-2/3 absolute top-50 right-0"
-        /> */}
+        <img src={image} alt="bg-home" className="h-screen w-full opacity-80" />
       </div>
 
       <div className="bg-lightgrey flex flex-col justify-between">
