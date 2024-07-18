@@ -73,7 +73,7 @@ function FavoritePage() {
     );
   });
   return (
-    <div className="flex flex-wrap justify-center overflow-scroll gap-5 p-5 ">
+    <div className="flex flex-wrap justify-center md:justify-normal overflow-scroll gap-5 p-5 ">
       {myFavoritesActivities}
     </div>
   );
