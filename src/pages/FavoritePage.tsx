@@ -24,19 +24,23 @@ function FavoritePage() {
     return (
       <div
         key={activity.id}
-        className="card bg-white w-40 h-40 md:w-60 md:h-60 lg:w-60 lg:w-60 flex-shrink-0 lg:shadow-xl"
+        className="card bg-white w-60 h-60 overflow-hidden  flex-shrink-0 shadow-xl"
       >
-        <figure className="h-40">
-          <img
-            src={activity.url_image}
-            alt={activity.title}
-            className="object-cover"
-          />
-        </figure>
+        <Link to={`http://localhost:5173/activity/${activity.id}`}>
+          <figure className="h-40">
+            <img
+              src={activity.url_image}
+              alt={activity.title}
+              className="object-cover"
+            />
+          </figure>
+        </Link>
         <div className="px-4 py-2">
-          <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
-            {activity.title}
-          </h2>
+          <Link to={`http://localhost:5173/activity/${activity.id}`}>
+            <h2 className="font-semibold font-hind text-sm md:text-sm lg:text-sm">
+              {activity.title}
+            </h2>
+          </Link>
           <div className="flex justify-between mt-1">
             <div className="badge bg-grey/50 gap-2 md:p-3 lg:p-4">
               <FontAwesomeIcon
@@ -69,7 +73,9 @@ function FavoritePage() {
     );
   });
   return (
-    <div className="flex flex-wrap gap-5 p-5 ">{myFavoritesActivities}</div>
+    <div className="flex flex-wrap justify-center overflow-scroll gap-5 p-5 ">
+      {myFavoritesActivities}
+    </div>
   );
 }
 export default FavoritePage;

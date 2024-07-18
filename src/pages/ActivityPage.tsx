@@ -87,12 +87,9 @@ function ActivityPage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
-
-         
-
           </div>
         </div>
       </div>

@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ProfilePage() {
   return (
-    <div className="min-h-screen max-w-6xl mx-auto flex  py-40 p-4 ">
-      <div className=" w-1/4 bg-whiteP p-2 rounded-lg shadow border">
-        <ul className="flex flex-col justify-center items-center mx-auto md:flex-col gap-20 mt-16">
+    <div className="h-80 max-w-6xl mx-auto flex flex-col md:flex-row  md:py-10 p-4 ">
+      <div className=" md:w-1/4 bg-whiteP p-2 rounded-lg shadow border w-full ">
+        <ul className="flex md:flex-col justify-around items-center mx-auto flex-row w-full  h-full">
           <Link
             to="/profile"
-            className="flex items-center block text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+            className="flex justify-center md:justify-normal items-center text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
           >
             <FontAwesomeIcon
               icon={faUser}
@@ -20,7 +20,7 @@ function ProfilePage() {
 
           <Link
             to="/profile/favorites"
-            className=" flex items-center block text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+            className=" flex items-center justify-center md:justify-normal text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
           >
             <FontAwesomeIcon
               icon={faHeart}
@@ -31,7 +31,7 @@ function ProfilePage() {
 
           <Link
             to="/profile/my-activities"
-            className="flex items-center block text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+            className="flex items-center justify-center md:justify-normal text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
           >
             <FontAwesomeIcon
               icon={faListUl}
@@ -41,8 +41,8 @@ function ProfilePage() {
           </Link>
         </ul>
       </div>
-      <div className="w-3/4 bg-whiteP p-8 pr-2 ml-4 rounded-lg shadow border">
-        <section className="h-full ">
+      <div className="md:w-3/4 bg-white w-full pr-2 mt-4 md:ml-4 md:mt-0 overflow-scroll h-full rounded-lg shadow border">
+        <section className="h-full min-h-72 ">
           <Outlet />
         </section>
       </div>

@@ -36,7 +36,7 @@ function ModalDeleteActivity({
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 min-h-2/5 fixed  bg-lightgrey rounded-md p-4">
+      <div className="z-50 w-2/5 min-w-80 min-h-2/5 fixed  bg-lightgrey rounded-md p-4">
         <div className="flex justify-between items-center mb-4">
           <span className="font-montserrat text-3xl font-semibold italic">
             Suppression d'une activité

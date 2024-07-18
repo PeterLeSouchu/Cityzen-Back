@@ -42,8 +42,8 @@ function Map() {
     title: activity.title,
     url: activity.url,
     description: activity.description,
-    avg_rate: activity.avg_rate,
-    image: activity.image,
+    avg_rate: activity.avg_rating,
+    image: activity.url_image,
     address: activity.address,
     phone: activity.phone,
     city_id: activity.city_id,
@@ -64,7 +64,7 @@ function Map() {
       {activities.map((activity, index) => (
         <Marker key={index} position={activity.geocode} icon={customIcon}>
           <Popup>
-            <Link to={`/activity/${activity.slug}`}>
+            <Link to={`/activity/${activity.id}`}>
               <img src={activity.image} alt={activity.title} />
               <h2 className="text-black font-hind font-bold text-center text-sm md:text-base lg:text-lg">
                 {activity.title}
