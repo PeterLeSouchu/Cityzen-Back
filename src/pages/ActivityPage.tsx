@@ -95,7 +95,8 @@ function ActivityPage() {
       </div>
       <div className="max-w-4xl mx-auto px-4">
         <p className="mx-4 md:mx-8 mt-4 text-black font-montserrat">
-          <FontAwesomeIcon icon={faLocationDot} /> {activity.address}
+          <FontAwesomeIcon icon={faLocationDot} /> {activity.city_name},
+          {activity.address}
         </p>
         <p className="mx-4 md:mx-8 mt-4  text-black font-montserrat">
           <FontAwesomeIcon icon={faPhone} /> {activity.phone}
