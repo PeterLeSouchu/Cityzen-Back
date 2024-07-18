@@ -4,12 +4,11 @@ import { Link, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { Activities, LoaderActivities } from '../@types';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
-import image from '../assets/fondCity (1).png';
+import image from '../assets/fondCity__1__2-removebg-preview.png';
 import {
   addToFavorites,
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
-import logo from '../assets/logo.png';
 
 export const loadActivities = async (): Promise<LoaderActivities> => {
   try {
@@ -159,19 +158,15 @@ function HomePage() {
 
   return (
     <>
-      <div className="hero bg-green2 w-screen h-screen    ">
-        <div className=" h-full flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat z-10">
+      <div className="hero bg-green2 w-screen h-screen flex  md:justify-around md:flex-row  flex-col    ">
+        <div className=" h-full w-1/2 flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat z-10">
           <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
           <h2 className="text-4xl md:text-5xl lg:text-6xl">
             Vivez votre ville <br />
             <span className="text-green italic">autrement</span>
           </h2>
         </div>
-        {/* <img
-          src={image}
-          alt="bg-home"
-          className="w-2/3 absolute top-50 right-0"
-        /> */}
+        <img src={image} alt="bg-home" className="w-1/2  rounded-lg" />
       </div>
 
       <div className="bg-lightgrey flex flex-col justify-between">

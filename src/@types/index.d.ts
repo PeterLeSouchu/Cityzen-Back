@@ -12,6 +12,7 @@ export interface Activities {
   latitude: number;
   longitude: number;
   city_id: number;
+  city_name: string;
 }
 
 // Type des information de l'utilisateur
