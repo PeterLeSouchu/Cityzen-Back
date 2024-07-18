@@ -159,23 +159,6 @@ function HomePage() {
 
   return (
     <>
-
-      /* <div className="hero bg-gradient-to-b from-lightgrey to-white h-screen">
-        <div className="hero-content lg:h-2/5 flex-col gap-16 lg:gap-vw-12 lg:flex-row">
-          <div className="h-full flex flex-col text-center gap-8 md:gap-12 lg:gap-16 font-montserrat">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl">
-              Vivez votre ville <br />
-              <span className="text-green italic">autrement</span>
-            </h2>
-          </div>
-          {/* <img
-            src={logo}
-            alt="logo-site"
-            className="max-w-sm md:max-w-md lg:max-w-lg rounded-lg shadow-2xl p-8 hover:scale-105 md:hover:scale-110 lg:hover:scale-125 duration-300 cursor-pointer"
-            onClick={scrollDown}
-          /> */} */
-
       <div className="hero bg-green2 w-screen h-screen    ">
         <div className=" h-full flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat z-10">
           <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
@@ -183,7 +166,6 @@ function HomePage() {
             Vivez votre ville <br />
             <span className="text-green italic">autrement</span>
           </h2>
-
         </div>
         {/* <img
           src={image}
