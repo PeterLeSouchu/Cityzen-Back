@@ -4,11 +4,13 @@ import { Link, useLoaderData } from 'react-router-dom';
 import axios from 'axios';
 import { Activities, LoaderActivities } from '../@types';
 import { useAppSelector, useAppDispatch } from '../hooks/redux';
+
+import image from '../assets/homeimage.webp';
+
 import {
   addToFavorites,
   deleteFromFavorites,
 } from '../store/reducers/profileReducer';
-import logo from '../assets/logo.png';
 
 export const loadActivities = async (): Promise<LoaderActivities> => {
   try {
@@ -54,7 +56,7 @@ function HomePage() {
     return (
       <div
         key={activity.id}
-        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className="card overflow-hidden bg-white w-60 h-60 flex-shrink-0 "
       >
         <Link to={`/activity/${activity.id}`}>
           <figure className="h-40">
@@ -107,7 +109,7 @@ function HomePage() {
     return (
       <div
         key={activity.id}
-        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className="card overflow-hidden  bg-white w-60 h-60 flex-shrink-0 "
       >
         <Link to={`/activity/${activity.id}`}>
           <figure className="h-40">
@@ -158,22 +160,20 @@ function HomePage() {
 
   return (
     <>
-      <div className="hero bg-gradient-to-b from-lightgrey to-white h-screen">
-        <div className="hero-content lg:h-2/5 flex-col gap-16 lg:gap-vw-12 lg:flex-row">
-          <div className="h-full flex flex-col text-center gap-8 md:gap-12 lg:gap-16 font-montserrat">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl">
-              Vivez votre ville <br />
-              <span className="text-green italic">autrement</span>
-            </h2>
-          </div>
-          <img
-            src={logo}
-            alt="logo-site"
-            className="max-w-sm md:max-w-md lg:max-w-lg rounded-lg shadow-2xl p-8 hover:scale-105 md:hover:scale-110 lg:hover:scale-125 duration-300 cursor-pointer"
-            onClick={scrollDown}
-          />
+      <div className="hero bg-gradient-to-t from-white via-green-500 to-green -500 w-screen h-screen">
+        <div className=" h-full w-1/2 flex flex-col justify-center text-center gap-8 md:gap-12 lg:gap-16 font-montserrat z-10">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl">CityZen</h1>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl">
+            Vivez votre ville <br />
+            <span className="text-green italic">autrement</span>
+          </h2>
         </div>
+
+        {/* <img
+          src={image}
+          alt="bg-home"
+          className="object-contain h-screen w-full opacity-80"
+        /> */}
       </div>
 
       <div className="bg-lightgrey flex flex-col justify-between">

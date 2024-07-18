@@ -172,7 +172,7 @@ function Header() {
         </Link>
 
         <form
-          className="h-12 w-3/4 md:w-1/2 bg-whiteP rounded-md items-center"
+          className="h-12 w-3/4 md:w-1/2 bg-white rounded-md items-center"
           onSubmit={(event) => handleFormSubmit(event)}
         >
           <div className="flex flex-row h-full">

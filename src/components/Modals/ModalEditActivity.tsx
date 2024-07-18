@@ -98,28 +98,50 @@ function ModalEditActivity({
 
   return (
     <div className=" absolute  w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 min:h-2/5 fixed  bg-gray-300 rounded-md p-4">
-        <button
-          onClick={() => {
-            setModalType(null);
-          }}
-          type="button"
-          className="w-full text-right"
-        >
-          Close
-        </button>
+      <div className="z-50 w-2/5 min-w-80 min-h-2/5 fixed  bg-lightgrey rounded-md p-4 border-2 border-slate-300 ">
+        <div className="flex justify-between items-center mb-4">
+          <span className="font-montserrat text-3xl font-semibold italic">
+            Modification d'activité
+          </span>
+          <button
+            onClick={() => {
+              setModalType(null);
+            }}
+            type="button"
+            className="btn btn-circle btn-outline"
+          >
+            <svg
+              aria-label="close"
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
         <form onSubmit={(e) => handlerRegister(e)} className="flex flex-col">
-          <div className="flex flex-col">
-            <label htmlFor="title">Titre</label>
+          <div className="flex flex-col my-1">
+            <label className="label" htmlFor="title">
+              Titre
+            </label>
             <input
               onChange={(e) => handlerTitle(e)}
               defaultValue={title}
               type="text"
               placeholder="Entrez le titre de votre activité"
               id="title"
+              className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col my-1">
             <label htmlFor="file">Photo (1 seule)</label>
             <input
               onChange={(e) => handlerImage(e)}
@@ -128,7 +150,7 @@ function ModalEditActivity({
               id="file"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col my-1">
             <label htmlFor="description">Description</label>
             <input
               onChange={(e) => handlerDescription(e)}
@@ -136,9 +158,10 @@ function ModalEditActivity({
               type="text"
               placeholder="Entrez la description de votre activité"
               id="description"
+              className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col my-1">
             <label htmlFor="phone">Numéro de téléphone</label>
             <input
               onChange={(e) => handlerPhone(e)}
@@ -146,9 +169,10 @@ function ModalEditActivity({
               type="text"
               placeholder="Entrez votre numéro de téléphone"
               id="phone"
+              className="input input-bordered w-full"
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col my-1">
             <label htmlFor="adress">Adresse postale</label>
             <input
               onChange={(e) => handlerAddress(e)}
@@ -156,9 +180,11 @@ function ModalEditActivity({
               type="text"
               placeholder="Entrez votre adresse postable"
               id="adress"
+              className="input input-bordered w-full"
+              s
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col my-1">
             <label htmlFor="city">Ville</label>
             <input
               onChange={(e) => handlerCity(e)}
@@ -166,9 +192,15 @@ function ModalEditActivity({
               type="text"
               placeholder="Entrez votre ville"
               id="city"
+              className="input input-bordered w-full"
             />
           </div>
-          <button type="submit">Confirmer</button>
+          <button
+            type="submit"
+            className="btn btn-success md:text-base text-sm text-white mt-4 w-1/4 mx-auto "
+          >
+            Confirmer
+          </button>
         </form>
       </div>
     </div>

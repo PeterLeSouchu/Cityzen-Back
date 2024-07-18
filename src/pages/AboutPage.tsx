@@ -49,8 +49,8 @@ function AboutPage() {
     <div className="py-10">
       <div className="container mx-auto px-4">
         <div className="bg-lightgrey p-6  shadow-lg  w-1024 h-332 flex flex-col md:flex-row">
-          <div className="md:w-2/5 md:pr-4 ml-20">
-            <h2 className="text-2xl font-montserrat mt-10 mb-4 text-black">
+          <div className="md:w-2/5 md:pr-4 mx-auto xl:p-6 ">
+            <h2 className="text-2xl font-montserrat mt-8 mb-4 text-black">
               À propos de nous
             </h2>
             <p className="font-montserrat text-black mb-4">
@@ -65,11 +65,11 @@ function AboutPage() {
               visiteurs de chaque ville.
             </p>
           </div>
-          <div className="md:w-1/2 mb-6 md:mb-0 md:pr-4 justify-center items-center">
+          <div className="md:w-1/2 mb-6 sm:pt-8 md:pt-8 md:mb-0 md:pr-4 justify-center items-center">
             <img
               src={imageabout}
               alt="cityview"
-              className="rounded-lg shadow-lg w-3/4 ml-20 mt-8 mb-8"
+              className="rounded-lg shadow-lg w-3/4 mx-auto mt-6 mb-8"
             />
           </div>
         </div>
@@ -77,14 +77,14 @@ function AboutPage() {
 
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row bg-white p-6  shadow-lg ">
-          <div className="md:w-1/2 mb-6 md:mb-0 md:pr-4">
+          <div className="md:w-1/2 mb-6 md:mb-0 md:pt-8 md:pr-4 ">
             <img
               src={image}
               alt="cityview"
-              className="rounded-lg shadow-lg w-3/4 ml-20 mt-8 mb-8"
+              className="flex rounded-lg shadow-lg w-3/4 mx-auto mt-8 mb-8"
             />
           </div>
-          <div className="md:w-2/5 md:pl-4 mt-12 mr-20">
+          <div className="md:w-2/5 md:pl-4 mt-12 mx-auto xl:p-6 ">
             <h2 className="text-2xl font-montserrat mb-4  text-black">
               Qu&apos;est-ce que CityZen?
             </h2>
@@ -107,7 +107,9 @@ function AboutPage() {
           <h2 className="text-4xl font-montserrat mb-10 mt-10 text-center  text-black">
             Notre équipe
           </h2>
-          <div className="flex justify-around mb-20">
+
+          <div className="flex flex-col justify-around sm:flex-row mb-20">
+
             {membersData.map((member, index) => {
               return (
                 <a
@@ -121,9 +123,9 @@ function AboutPage() {
                   <img
                     src={member.avatar_url}
                     alt={member.login}
-                    className="rounded-full w-24 h-24 mb-2 mx-auto"
+                    className="rounded-full w-20 h-20 mb-2 mx-auto"
                   />
-                  <p className="text-lg font-hind font-semibold text-green mt-8">
+                  <p className="text-md font-hind font-semibold text-green mt-8 ">
                     {member.login}
                   </p>
                 </a>

@@ -45,7 +45,7 @@ function MyActivitiesPage() {
     return (
       <div
         key={myActivity.id}
-        className="card bg-white w-60 h-60 flex-shrink-0 lg:shadow-xl"
+        className=" overflow-hidden card bg-white  w-60 h-60 flex-shrink-0 shadow-xl"
       >
         <figure>
           <Link to={`http://localhost:5173/activity/${myActivity.id}`}>
@@ -99,7 +99,7 @@ function MyActivitiesPage() {
   }
 
   return (
-    <div className="flex justify-center flex-wrap gap-2 p-5">
+    <div className="flex flex-wrap gap-2 justify-center md:justify-normal p-5">
       {activities}
       <button
         onClick={handlerAdd}
