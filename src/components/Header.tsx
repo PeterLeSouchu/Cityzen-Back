@@ -24,6 +24,7 @@ function Header() {
   const [modalSignupOTP, setModalSignupOTP] = useState(false);
 
   const notify = () => {
+    console.log('nav headerrrrrrrr');
     if (modalSignin) {
       toast.success('Connexion réussie', {
         position: 'top-left',

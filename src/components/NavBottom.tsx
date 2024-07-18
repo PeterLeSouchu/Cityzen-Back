@@ -69,7 +69,6 @@ function NavBottom() {
 
   return (
     <>
-      {' '}
       <nav className="flex justify-around items-center bg-lightgrey md:hidden fixed bottom-0 left-0 right-0 h-7 z-40">
         <div>
           <div className="dropdown dropdown-top">
@@ -118,7 +117,7 @@ function NavBottom() {
           <FontAwesomeIcon icon={faCircleInfo} className="h-8" />
         </Link>
       </nav>
-      {modalSignup ? (
+      {/* {modalSignup ? (
         <ModalSignup
           setModalSignup={setModalSignup}
           setModalSignupOTP={setModalSignupOTP}
@@ -142,7 +141,7 @@ function NavBottom() {
         pauseOnHover
         theme="light"
         transition={Slide}
-      />
+      /> */}
     </>
   );
 }
