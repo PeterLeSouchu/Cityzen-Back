@@ -87,18 +87,16 @@ function ActivityPage() {
                 className="text-yellow-300 md:h-4 lg:h-5"
               />
               <span className="font-hind font-semibold text-sm md:text-base lg:text-lg">
-                {activity.avg_rate}
+                {activity.avg_rating}
               </span>
             </div>
-
-         
-
           </div>
         </div>
       </div>
       <div className="max-w-4xl mx-auto px-4">
         <p className="mx-4 md:mx-8 mt-4 text-black font-montserrat">
-          <FontAwesomeIcon icon={faLocationDot} /> {activity.address}
+          <FontAwesomeIcon icon={faLocationDot} /> {activity.city_name},
+          {activity.address}
         </p>
         <p className="mx-4 md:mx-8 mt-4  text-black font-montserrat">
           <FontAwesomeIcon icon={faPhone} /> {activity.phone}

@@ -10,9 +10,9 @@ export default {
         blue: '#4F5D77',
         black: '#000500',
         grey: '#828282',
-        lightgrey: '#E0E0E0',
-        white: '#FFFAFF',
-        whiteP: '#FFFFFF',
+        lightgrey: '#ededed',
+        white: '#FFFFFF',
+        green2: '#e4f7f7',
       },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],

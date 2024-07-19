@@ -68,7 +68,7 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
 
   return (
     <div className="absolute w-screen flex justify-center items-center h-screen left-0 top-0">
-      <div className="z-50 w-2/5 min-h-2/5 fixed  bg-lightgrey rounded-md p-4">
+      <div className="z-50 w-2/5 min-w-80 min-h-2/5 fixed  bg-lightgrey rounded-md p-4 border-2 border-slate-300">
         <div className="flex justify-between items-center mb-4">
           <span className="font-montserrat text-3xl font-semibold italic">
             Inscription
@@ -190,7 +190,7 @@ function ModalSignup({ setModalSignup, setModalSignupOTP }: ModalSignupProps) {
           </div>
           <button
             type="submit"
-            className="btn btn-success text-base text-white mt-4 w-1/4 mx-auto"
+            className="btn md:text-base text-sm btn-success text-white mt-4 w-1/4 mx-auto"
           >
             Confirmer
           </button>

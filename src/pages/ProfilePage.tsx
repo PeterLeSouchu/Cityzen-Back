@@ -1,25 +1,53 @@
 import { Link, Outlet } from 'react-router-dom';
+import { faUser, faHeart, faListUl } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function ProfilePage() {
   return (
-    <div className="w-screen h-80 flex items-center justify-center">
-      <div className="flex flex-col md:flex-row items-center border-2 w-9/12   rounded-md h-5/6 overflow-scroll">
-        <section className="md:w-1/6 w-full min-w-16 border-b-2  md:border-r-2 flex flex-row justify-around items-center md:flex-col md:h-full h-24">
-          <Link to="/profile" className=" text-base lg:text-xl">
-            Mes informations
+    <div className="h-80 max-w-6xl mx-auto flex flex-col md:flex-row  md:py-10 p-4 ">
+      <div className=" md:w-1/4 bg-whiteP p-2 rounded-lg shadow border w-full ">
+        <ul className="flex md:flex-col justify-around items-center mx-auto flex-row w-full  h-full">
+          <Link
+            to="/profile"
+            className="flex justify-center md:justify-normal items-center text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+          >
+            <FontAwesomeIcon
+              icon={faUser}
+              className="border rounded-btn p-2 text-3xl md:text-base"
+            />
+            <span className="hidden md:inline ml-2">Mes informations</span>
           </Link>
-          <Link to="/profile/favorites" className=" text-base lg:text-xl">
-            Mes favoris
+
+          <Link
+            to="/profile/favorites"
+            className=" flex items-center justify-center md:justify-normal text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+          >
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="border rounded-btn p-2 text-3xl md:text-base"
+            />{' '}
+            <span className="hidden md:inline ml-2">Mes favoris</span>
           </Link>
-          <Link to="/profile/my-activities" className=" text-base lg:text-xl">
-            Mes activités
+
+          <Link
+            to="/profile/my-activities"
+            className="flex items-center justify-center md:justify-normal text-base lg:text-xl p-2 rounded transition duration-300 ease-in-out hover:bg-gray-300 w-full"
+          >
+            <FontAwesomeIcon
+              icon={faListUl}
+              className="border rounded-btn p-2 text-3xl md:text-base"
+            />{' '}
+            <span className="hidden md:inline ml-2">Mes activités</span>
           </Link>
-        </section>
-        <section className="h-full">
+        </ul>
+      </div>
+      <div className="md:w-3/4 bg-white w-full pr-2 mt-4 md:ml-4 md:mt-0 overflow-scroll h-full rounded-lg shadow border">
+        <section className="h-full min-h-72 ">
           <Outlet />
         </section>
       </div>
     </div>
   );
 }
+
 export default ProfilePage;

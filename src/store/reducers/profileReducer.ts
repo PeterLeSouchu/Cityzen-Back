@@ -23,7 +23,7 @@ export const addToFavorites = createAsyncThunk(
         withCredentials: true,
       }
     );
-    return data.data as Activities;
+    return data.data[0] as Activities;
   }
 );
 export const deleteFromFavorites = createAsyncThunk(
@@ -35,7 +35,7 @@ export const deleteFromFavorites = createAsyncThunk(
         withCredentials: true,
       }
     );
-    return data.data.id as number;
+    return data.data[0].id as number;
   }
 );
 
