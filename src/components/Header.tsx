@@ -79,7 +79,7 @@ function Header() {
         `http://localhost:3000/country/${inputValue}`
       );
 
-      const suggestions = response.data.map((suggestedCountry) => ({
+      const suggestions = response.data.data.map((suggestedCountry) => ({
         id: suggestedCountry.id,
         name: suggestedCountry.name,
       }));
@@ -111,9 +111,10 @@ function Header() {
         `http://localhost:3000/city/${inputValue}`
       );
 
-      const suggestions = response.data.map((suggestedCity) => ({
+      const suggestions = response.data.data.map((suggestedCity) => ({
         id: suggestedCity.id,
         name: suggestedCity.name,
+        code: suggestedCity.zip_code
       }));
 
       setCitySuggestions(suggestions);
@@ -155,6 +156,7 @@ function Header() {
     setModalSignup((modal) => !modal);
     setModalSignin(false);
   }
+
   function handlerSingin(): void {
     setModalSignin((modal) => !modal);
     setModalSignup(false);
@@ -222,7 +224,7 @@ function Header() {
                       className="btn"
                       onClick={() => changeCityInput(suggestion.name)}
                     >
-                      {suggestion.name}
+                      {suggestion.name} ({suggestion.code})
                     </button>
                   ))}
                 </div>
