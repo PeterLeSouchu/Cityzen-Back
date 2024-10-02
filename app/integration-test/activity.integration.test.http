@@ -1,0 +1,25 @@
+# @url = http://localhost:{{$dotenv PORT}}
+@url = http://localhost:3000
+@mainEndpoint = activity
+
+### PATCH /activity/:id
+PATCH {{url}}/{{mainEndpoint}}/{{$randomInt 1 12}}
+Content-Type: application/json
+
+{
+  "description": "il s’agit d'une modif"
+}
+
+### DELETE /activity/:id
+DELETE {{url}}/{{mainEndpoint}}/{{$randomInt 1 12}}
+
+### GET /activity/rating
+GET {{url}}/{{mainEndpoint}}/rating
+
+### GET /activity/recent
+GET {{url}}/{{mainEndpoint}}/recent
+
+### GET /country/city
+@country = France
+@city = Aulnay-sous-Bois
+GET {{url}}/{{mainEndpoint}}/{{country}}/{{city}}
