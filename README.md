@@ -1,1 +1,1 @@
-You can see Cityzen here : https://cityzen-2024-225cd2496173.herokuapp.com/
+This project needs some API keys with Geo.api.gouv API and YELP API which reinitialize sometimes, so you can't install our projet on your pc but you can check Cityzen here : https://cityzen-2024-225cd2496173.herokuapp.com/
